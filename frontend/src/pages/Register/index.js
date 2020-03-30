@@ -13,6 +13,7 @@ export default function Register() {
   const [whatsapp, setWhatsapp] = useState('');
   const [city, setCity] = useState('');
   const [uf, setUf] = useState('');
+  const [password, setPassword] = useState('');
 
   const history = useHistory();
 
@@ -20,11 +21,12 @@ export default function Register() {
     e.preventDefault();
 
     const data = {
+      password,
       name,
       email,
       whatsapp,
       city,
-      uf,
+      uf
     };
 
     try {
@@ -52,7 +54,7 @@ export default function Register() {
 
           <Link className='back-link' to="./">
             <FiArrowLeft size={16} color="#E02041" />
-            Não tenho cadastro
+            Voltar para Home
           </Link>
         </section>
 
@@ -85,6 +87,13 @@ export default function Register() {
               style={{ width: 80 }}
               value={uf}
               onChange={e => setUf(e.target.value)}
+            />
+          </div>
+          <div className="input-password">
+            <input
+              placeholder='Password'
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
           </div>
 

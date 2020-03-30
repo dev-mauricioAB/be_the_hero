@@ -9,12 +9,13 @@ module.exports = {
   },
 
   async create(request, response) {
-    const { name, email, whatsapp, city, uf } = request.body;
+    const { password, name, email, whatsapp, city, uf } = request.body;
 
     const id = generateUniquiId();
 
     await connection('ongs').insert({
       id,
+      password,
       name,
       email,
       whatsapp,

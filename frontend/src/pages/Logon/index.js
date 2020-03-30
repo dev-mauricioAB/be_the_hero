@@ -11,12 +11,13 @@ import logoImg from '../../assets/logo.svg';
 
 export default function Logon() {
   const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
   const history = useHistory();
 
   async function handleLogin(e) {
     e.preventDefault();
 
-    try {
+    try { ////
       const response = await api.post('sessions', { id });
 
       localStorage.setItem('ongId', id);
@@ -39,6 +40,11 @@ export default function Logon() {
           <input
             placeholder="Sua ID"
             value={id}
+            onChange={e => setPassword(e.target.value)}
+          />
+          <input
+            placeholder="Sua Senha"
+            value={password}
             onChange={e => setId(e.target.value)}
           />
           <button className="button" type="submit">Entrar</button>
