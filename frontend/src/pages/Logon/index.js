@@ -1,33 +1,33 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { FiLogIn } from 'react-icons/fi';
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { FiLogIn } from "react-icons/fi";
 
-import api from '../../services/api';
+import api from "../../services/api";
 
-import './styles.css';
+import "./styles.css";
 
-import herosImg from '../../assets/heroes.png';
-import logoImg from '../../assets/logo.svg';
+import herosImg from "../../assets/heroes.png";
+import logoImg from "../../assets/logo.svg";
 
 export default function Logon() {
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
   const history = useHistory();
 
   async function handleLogin(e) {
     e.preventDefault();
 
-    try { ////
-      const response = await api.post('sessions', { id });
+    try {
+      ////
+      const response = await api.post("sessions", { id });
 
-      localStorage.setItem('ongId', id);
-      localStorage.setItem('ongName', response.data.name);
+      localStorage.setItem("ongId", id);
+      localStorage.setItem("ongName", response.data.name);
 
-      history.push('/profile');
+      history.push("/profile");
     } catch (err) {
-      alert('Falha no login. Tente novamente.');
+      alert("Falha no login. Tente novamente.");
     }
-
   }
 
   return (
@@ -40,19 +40,21 @@ export default function Logon() {
           <input
             placeholder="Sua ID"
             value={id}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setId(e.target.value)}
           />
           <input
             placeholder="Sua Senha"
             value={password}
-            onChange={e => setId(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="button" type="submit">Entrar</button>
+          <button className="button" type="submit">
+            Entrar
+          </button>
 
-          <Link className='back-link' to="./register">
+          <Link className="back-link" to="./register">
             <FiLogIn size={16} color="#E02041" />
             Não tenho cadastro
-            </Link>
+          </Link>
         </form>
       </section>
 
