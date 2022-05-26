@@ -16,7 +16,8 @@
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "express": "^4.17.1",
-    "knex": "^0.20.13"
+    "knex": "^0.20.13",
+    "sqlite3": "^5.0.8"
   },
   "devDependencies": {
     "jest": "^25.2.3",
