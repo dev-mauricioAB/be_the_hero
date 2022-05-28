@@ -46,7 +46,7 @@ export default function Logon() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="button" type="submit">
+          <button className="button bg-red-500" type="submit">
             Entrar
           </button>
 
@@ -57,7 +57,16 @@ export default function Logon() {
         </form>
       </section>
 
-      <img src={herosImg} alt="Heroes" />
+      <div className="min-h-screen flex items-center justify-center px-16">
+        <div className="relative w-full max-w-lg">
+          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+          <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+          <div className="m-8 relative space-y-4">
+            <img src={herosImg} alt="Heroes" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
