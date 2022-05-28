@@ -76,7 +76,7 @@ export default function NewIncident() {
           />
 
 
-          <button className='button' type='submit'>Cadastrar</button>
+          <button className='button bg-red-500' type='submit'>Cadastrar</button>
         </form>
       </div>
     </div>

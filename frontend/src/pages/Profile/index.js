@@ -53,7 +53,7 @@ export default function Profile() {
         <span>Bem Vinda, {ongName}</span>
 
         <Link className="button" to="/incidents/new">Cadastrar novo caso</Link>
-        <button onClick={handleLogout} type="button">
+        <button className="flex justify-center items-center"onClick={handleLogout} type="button">
           <FiPower size={18} color="#E02041" />
         </button>
       </header>
