@@ -23,3 +23,8 @@
   font-size: 32px;
   margin-bottom: 32px;
 }
+
+.toast-login-error {
+  background-color: #ffa4a4;
+  color: #000000;
+}
