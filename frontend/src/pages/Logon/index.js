@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import * as Yup from "yup";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 import api from "../../services/api";
 
@@ -14,6 +15,8 @@ import logoImg from "../../assets/logo.svg";
 export default function Logon() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const schema = Yup.object().shape({
@@ -52,6 +55,8 @@ export default function Logon() {
     else notify("👓 Ops. Verifique suas credenciais.");
   }
 
+  const handleShowPassword = () => setShowPassword(!showPassword);
+
   return (
     <div className="flex sm:flex-col md:flex-row mt-0 sm:pt-2 justify-center items-center ">
       <section>
@@ -89,11 +94,12 @@ export default function Logon() {
                 placeholder="Seu ID"
               />
             </div>
-            <div className="mb-4">
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                class="form-control block
+              <div className="w-full flex justify-center items-center">
+                <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="
+                  form-control block
                   w-full
                   px-3
                   py-1.5
@@ -108,10 +114,17 @@ export default function Logon() {
                   m-0
                   invalid:border-pink-500
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="password"
-                type="password"
-                placeholder="***********"
-              />
+                  id="password"
+                  type={showPassword === false ? "password" : "text"}
+                  placeholder="******************"
+                />
+              <div className="text-2xl absolute ml-[17rem]">
+                {showPassword === false ? (
+                  <AiFillEye onClick={handleShowPassword} color="#585858" cursor="pointer"/>
+                ) : (
+                  <AiFillEyeInvisible onClick={handleShowPassword} color="#585858" cursor="pointer"/>
+                )}
+              </div>
             </div>
             <button className="button bg-red-500" type="submit">
               Entrar

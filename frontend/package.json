@@ -15,11 +15,16 @@
     "axios": "^0.27.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.1",
     "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.2",
+    "postcss": "^8.4.14",
+    "tailwind": "^4.0.0",
+    "react-icons": "^4.3.1"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,8 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "tailwindcss": "^3.0.24"
   }
 }
