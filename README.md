@@ -3,7 +3,7 @@
   <p>Apoie ONGs, apoie as boas causas, <strong>be a hero!</strong><p>
 
   [![Netlify Status](https://api.netlify.com/api/v1/badges/a105875c-8c87-46d0-888a-f6b21ddb5323/deploy-status)](https://app.netlify.com/sites/be-thehero/deploys) ![](https://img.shields.io/badge/omnistack-11-blueviolet?style=flat-square)
-  ![alt release](https://img.shields.io/github/v/release/jdev-mauricioAB/be_the_hero?style=flat-square)
+  ![alt release](https://img.shields.io/github/v/release/dev-mauricioAB/be_the_hero?style=flat-square)
 </div>
 
 ![alt Mockup frontend](.github/mockup.png)
