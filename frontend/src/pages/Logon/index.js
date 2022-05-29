@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
+import * as Yup from "yup";
 
 import api from "../../services/api";
 
@@ -15,8 +16,14 @@ export default function Logon() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const notify = () =>
-    toast("👓 Ops. Verifique suas credenciais.", {
+  const schema = Yup.object().shape({
+    id: Yup.string().required(),
+    // password: Yup.string().required(),
+    password: Yup.string(),
+  });
+
+  const notify = (message) =>
+    toast(message, {
       position: "top-center",
       className: "toast-login-error",
     });
@@ -24,16 +31,25 @@ export default function Logon() {
   async function handleLogin(e) {
     e.preventDefault();
 
-    try {
-      const response = await api.post("sessions", { id, password });
+    const loginData = {
+      id,
+      password,
+    };
 
-      localStorage.setItem("ongId", id);
-      localStorage.setItem("ongName", response.data.name);
+    const formValid = await schema.isValid(loginData);
 
-      navigate("/profile");
-    } catch (err) {
-      notify();
-    }
+    if (formValid)
+      try {
+        const response = await api.post("sessions", loginData);
+
+        localStorage.setItem("ongId", id);
+        localStorage.setItem("ongName", response.data.name);
+
+        navigate("/profile");
+      } catch (err) {
+        notify("🧘🏼‍♂️ Ops. Houve um erro ao tentar logar. Tente novamente.");
+      }
+    else notify("👓 Ops. Verifique suas credenciais.");
   }
 
   return (
@@ -48,7 +64,7 @@ export default function Logon() {
             onSubmit={handleLogin}
             className="block text-gray-700 text-sm font-bold mb-2"
           >
-            <div className="mb-2">              
+            <div className="mb-2">
               <input
                 value={id}
                 onChange={(e) => setId(e.target.value)}
@@ -68,9 +84,9 @@ export default function Logon() {
                   m-0
                   invalid:border-pink-500         
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="username"
+                id="id"
                 type="text"
-                placeholder="Username"
+                placeholder="Seu ID"
               />
             </div>
             <div className="mb-4">
@@ -94,7 +110,7 @@ export default function Logon() {
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="password"
                 type="password"
-                placeholder="******************"
+                placeholder="***********"
               />
             </div>
             <button className="button bg-red-500" type="submit">
