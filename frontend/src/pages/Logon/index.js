@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
+import { ToastContainer, toast } from 'react-toastify';
 
 import api from "../../services/api";
 
@@ -14,6 +15,11 @@ export default function Logon() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const notify = () => toast("👓 Ops. Verifique suas credenciais.", {
+    position: "top-center",
+    className: "toast-login-error"
+  });
+
   async function handleLogin(e) {
     e.preventDefault();
 
@@ -25,7 +31,7 @@ export default function Logon() {
 
       navigate("/profile");
     } catch (err) {
-      alert("Falha no login. Tente novamente.");
+      notify();
     }
   }
 
@@ -67,6 +73,8 @@ export default function Logon() {
           </div>
         </div>
       </div>
+
+      <ToastContainer />
     </div>
   );
 }
