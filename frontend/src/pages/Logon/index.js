@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 import api from "../../services/api";
 
@@ -15,10 +15,11 @@ export default function Logon() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const notify = () => toast("👓 Ops. Verifique suas credenciais.", {
-    position: "top-center",
-    className: "toast-login-error"
-  });
+  const notify = () =>
+    toast("👓 Ops. Verifique suas credenciais.", {
+      position: "top-center",
+      className: "toast-login-error",
+    });
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -36,34 +37,79 @@ export default function Logon() {
   }
 
   return (
-    <div className="logon-container">
-      <section className="form">
-        <img src={logoImg} alt="Be The Hero" />
+    <div className="flex sm:flex-col md:flex-row mt-0 sm:pt-2 justify-center items-center ">
+      <section>
+        <img src={logoImg} alt="Be The Hero" className="mb-8" />
 
-        <form onSubmit={handleLogin}>
-          <h1>Faça seu Logon</h1>
-          <input
-            placeholder="Sua ID"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-          />
-          <input
-            placeholder="Sua Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button className="button bg-red-500" type="submit">
-            Entrar
-          </button>
+        <h1 className="text-2xl mb-2">Faça seu Logon</h1>
 
-          <Link className="back-link" to="./register">
-            <FiLogIn size={16} color="#E02041" />
-            Não tenho cadastro
-          </Link>
-        </form>
+        <div className="w-80">
+          <form
+            onSubmit={handleLogin}
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            <div className="mb-2">              
+              <input
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                className="                  
+                  block
+                  w-full
+                  px-3
+                  py-1.5
+                  text-base
+                  font-normal
+                  text-gray-700
+                  bg-white bg-clip-padding
+                  border border-solid border-gray-300
+                  rounded
+                  transition
+                  ease-in-out
+                  m-0
+                  invalid:border-pink-500         
+                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                id="username"
+                type="text"
+                placeholder="Username"
+              />
+            </div>
+            <div className="mb-4">
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                class="form-control block
+                  w-full
+                  px-3
+                  py-1.5
+                  text-base
+                  font-normal
+                  text-gray-700
+                  bg-white bg-clip-padding
+                  border border-solid border-gray-300
+                  rounded
+                  transition
+                  ease-in-out
+                  m-0
+                  invalid:border-pink-500
+                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                id="password"
+                type="password"
+                placeholder="******************"
+              />
+            </div>
+            <button className="button bg-red-500" type="submit">
+              Entrar
+            </button>
+
+            <Link className="back-link" to="./register">
+              <FiLogIn size={16} color="#E02041" />
+              Não tenho cadastro
+            </Link>
+          </form>
+        </div>
       </section>
 
-      <div className="min-h-screen flex items-center justify-center px-16">
+      <section className="min-h-screen flex items-center justify-center px-16">
         <div className="relative w-full max-w-lg">
           <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
           <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -72,7 +118,7 @@ export default function Logon() {
             <img src={herosImg} alt="Heroes" />
           </div>
         </div>
-      </div>
+      </section>
 
       <ToastContainer />
     </div>
