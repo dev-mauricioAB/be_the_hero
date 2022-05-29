@@ -4,8 +4,6 @@ import { FiArrowLeft } from 'react-icons/fi';
 
 import api from '../../services/api';
 
-import './styles.css'
-
 import logoImg from '../../assets/logo.svg';
 
 export default function NewIncident() {
@@ -40,13 +38,13 @@ export default function NewIncident() {
   }
 
   return (
-    <div className="new-incident-container">
-      <div className='content'>
-        <section>
+    <div className="h-screen w-full m-auto max-w-5xl flex items-center justify-center">
+      <div className='bg-gray-100 p-24 shadow-md rounded flex justify-between items-center'>
+        <section className="w-full max-w-sm">
           <img src={logoImg} alt="Be The Hero" />
 
-          <h1>Cadastrar novo caso</h1>
-          <p>Cadastrar o caso detalhadamente para encontrar
+          <h1 className="mx-0 mt-16 mb-8 text-2xl">Cadastrar novo caso</h1>
+          <p className="text-lg text-[#737380] leading-8">Cadastrar o caso detalhadamente para encontrar
           um herói para resolver isso.
           </p>
 
@@ -56,20 +54,68 @@ export default function NewIncident() {
           </Link>
         </section>
 
-        <form onSubmit={handleNewIncident}>
+        <form className="w-full max-w-md" onSubmit={handleNewIncident}>
           <input
+            class="
+              font-normal
+              shadow 
+              appearance-none 
+              rounded
+              text-base
+              w-full 
+              h-14
+              py-2 
+              px-3 
+              border border-solid border-gray-300
+              leading-tight 
+              focus:shadow-outline 
+              mb-2
+              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             placeholder='Título do caso'
             value={title}
-            onChange={e => setTitle(e.target.value)}
+            onChange={e => setTitle(e.target.value)}vv
           />
 
           <textarea
+            class="
+              shadow
+              form-control
+              block
+              w-full
+              px-3
+              py-1.5
+              text-base
+              text-gray-700
+              bg-white bg-clip-padding
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              mb-2
+              focus:shadow-outline
+              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:border-none focus:outline-none"
+            rows={5}
             placeholder='Descrição'
             value={description}
             onChange={e => setDescription(e.target.value)}
           />
 
           <input
+            class="
+              font-normal
+              shadow 
+              text-base
+              appearance-none 
+              rounded
+              w-full 
+              h-14
+              py-2 
+              px-3 
+              border border-solid border-gray-300
+              leading-tight 
+              focus:shadow-outline 
+              mb-1
+              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             placeholder='Valor em reais'
             value={value}
             onChange={e => setValue(e.target.value)}
