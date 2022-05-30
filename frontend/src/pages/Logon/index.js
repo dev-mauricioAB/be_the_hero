@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 import api from "../../services/api";
+import { loginSchema } from "../../validations/form";
 
 import "./styles.css";
 
@@ -39,7 +40,7 @@ export default function Logon() {
       password,
     };
 
-    const formValid = await schema.isValid(loginData);
+    const formValid = await loginSchema.isValid(loginData);
 
     if (formValid)
       try {
