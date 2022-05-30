@@ -118,7 +118,7 @@ export default function Logon() {
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="password"
                   type={showPassword === false ? "password" : "text"}
-                  placeholder="******************"
+                  placeholder={showPassword === false ? "*******" : "Sua senha"}
                 />
               <div className="text-2xl absolute ml-[17rem]">
                 {showPassword === false ? (
