@@ -9,5 +9,5 @@ export const loginSchema = Yup.object().shape({
 export const newIncidentSchema = Yup.object().shape({
   title: Yup.string().required(),
   description: Yup.string().required(),
-  value: Yup.number().required()
-})
+  value: Yup.string().required(),
+});
