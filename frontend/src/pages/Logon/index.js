@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
-import { ToastContainer, toast } from "react-toastify";
-import * as Yup from "yup";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
+import Toast, { showToast } from "../../components/Toast";
+
 import api from "../../services/api";
+import { loginSchema } from "../../validations/form";
 
 import "./styles.css";
 
@@ -19,17 +20,14 @@ export default function Logon() {
 
   const navigate = useNavigate();
 
-  const schema = Yup.object().shape({
-    id: Yup.string().required(),
-    // password: Yup.string().required(),
-    password: Yup.string(),
-  });
-
-  const notify = (message) =>
-    toast(message, {
+  const notify = (message) => showToast({
+    type: "error", 
+    message,
+    config: {
       position: "top-center",
       className: "toast-login-error",
-    });
+    }
+  });
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -39,7 +37,7 @@ export default function Logon() {
       password,
     };
 
-    const formValid = await schema.isValid(loginData);
+    const formValid = await loginSchema.isValid(loginData);
 
     if (formValid)
       try {
@@ -76,6 +74,7 @@ export default function Logon() {
                 className="                  
                   block
                   w-full
+                  h-14
                   px-3
                   py-1.5
                   text-base
@@ -94,13 +93,14 @@ export default function Logon() {
                 placeholder="Seu ID"
               />
             </div>
-              <div className="w-full flex justify-center items-center">
-                <input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="
+            <div className="w-full flex justify-center items-center">
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="
                   form-control block
                   w-full
+                  h-14
                   px-3
                   py-1.5
                   text-base
@@ -114,15 +114,23 @@ export default function Logon() {
                   m-0
                   invalid:border-pink-500
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="password"
-                  type={showPassword === false ? "password" : "text"}
-                  placeholder="******************"
-                />
+                id="password"
+                type={showPassword === false ? "password" : "text"}
+                placeholder={showPassword === false ? "*******" : "Sua senha"}
+              />
               <div className="text-2xl absolute ml-[17rem]">
                 {showPassword === false ? (
-                  <AiFillEye onClick={handleShowPassword} color="#585858" cursor="pointer"/>
+                  <AiFillEye
+                    onClick={handleShowPassword}
+                    color="#585858"
+                    cursor="pointer"
+                  />
                 ) : (
-                  <AiFillEyeInvisible onClick={handleShowPassword} color="#585858" cursor="pointer"/>
+                  <AiFillEyeInvisible
+                    onClick={handleShowPassword}
+                    color="#585858"
+                    cursor="pointer"
+                  />
                 )}
               </div>
             </div>
@@ -149,7 +157,7 @@ export default function Logon() {
         </div>
       </section>
 
-      <ToastContainer />
+      <Toast />
     </div>
   );
 }
