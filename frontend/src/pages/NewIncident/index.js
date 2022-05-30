@@ -39,7 +39,7 @@ export default function NewIncident() {
 
   return (
     <div className="h-screen w-full m-auto max-w-5xl flex items-center justify-center">
-      <div className='bg-gray-100 p-24 shadow-md rounded flex justify-between items-center'>
+      <div className='bg-gray-100 w-full p-24 shadow-md rounded flex justify-between items-center'>
         <section className="w-full max-w-sm">
           <img src={logoImg} alt="Be The Hero" />
 
