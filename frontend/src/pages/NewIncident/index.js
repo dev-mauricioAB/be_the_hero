@@ -78,7 +78,7 @@ export default function NewIncident() {
 
         <form className="w-full max-w-md" onSubmit={handleNewIncident}>
           <input
-            class="
+            className="
               font-normal
               shadow 
               appearance-none 
@@ -99,7 +99,7 @@ export default function NewIncident() {
           />
 
           <textarea
-            class="
+            className="
               shadow
               form-control
               block
@@ -127,7 +127,7 @@ export default function NewIncident() {
             mask="currency"
             placeholder="R$ 0,00"
             onChange={handleChange}
-            class={`
+            className={`
               font-normal
               shadow 
               text-base
