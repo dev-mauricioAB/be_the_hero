@@ -11,3 +11,12 @@ export const newIncidentSchema = Yup.object().shape({
   description: Yup.string().required(),
   value: Yup.string().required(),
 });
+
+export const registerSchema = Yup.object().shape({
+  password: Yup.string().required(),
+  name: Yup.string().required(),
+  email: Yup.string().email().required(),
+  whatsapp: Yup.string().required(),
+  city: Yup.string().required(),
+  uf: Yup.string().required(),
+})
