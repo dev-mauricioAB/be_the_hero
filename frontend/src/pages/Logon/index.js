@@ -20,14 +20,15 @@ export default function Logon() {
 
   const navigate = useNavigate();
 
-  const notify = (message) => showToast({
-    type: "error", 
-    message,
-    config: {
-      position: "top-center",
-      className: "toast-login-error",
-    }
-  });
+  const notify = (message) =>
+    showToast({
+      type: "error",
+      message,
+      config: {
+        position: "top-center",
+        className: "toast-login-error",
+      },
+    });
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -93,7 +94,7 @@ export default function Logon() {
                 placeholder="Seu ID"
               />
             </div>
-            <div className="w-full flex justify-center items-center">
+            <div className="w-full justify-center items-center hidden">
               <input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -134,12 +135,18 @@ export default function Logon() {
                 )}
               </div>
             </div>
-            <button className="button bg-red-500" type="submit">
+            <button
+              className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              type="submit"
+            >
               Entrar
             </button>
 
-            <Link className="back-link" to="./register">
-              <FiLogIn size={16} color="#E02041" />
+            <Link
+              className="flex mt-5 text-lg items-center text-[#41414d]"
+              to="./register"
+            >
+              <FiLogIn size={16} color="#E02041" className="mr-2" />
               Não tenho cadastro
             </Link>
           </form>

@@ -1,6 +1,5 @@
 import React from "react";
 
-import "./css/global.css";
 import "./css/tailwind-globaly.css";
 import "react-toastify/dist/ReactToastify.css";
 
