@@ -5,6 +5,9 @@ module.exports = {
       animation: {
         blob: "blob 7s infinite",
       },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+      },
       keyframes: {
         blob: {
           "0%": {
