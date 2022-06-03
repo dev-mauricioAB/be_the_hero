@@ -8,6 +8,7 @@ import logoImg from "../../assets/logo.svg";
 
 export default function Profile() {
   const [incidents, setIncidents] = useState([]);
+  const [deleteIncidentId, setDeleteInidentId] = useState("");
 
   const navigate = useNavigate();
 
@@ -27,17 +28,8 @@ export default function Profile() {
   }, [ongId]);
 
   async function handleDeleteIncident(id) {
-    try {
-      await api.delete(`incidents/${id}`, {
-        headers: {
-          Authorization: ongId,
-        },
-      });
-
-      setIncidents(incidents.filter((incident) => incident.id !== id));
-    } catch (err) {
-      alert("Erro ao deleter caso. Tente novamente.");
-    }
+    setDeleteInidentId(id);
+    document.getElementById("staticBackdropButton").click();
   }
 
   function handleLogout() {
@@ -46,23 +38,51 @@ export default function Profile() {
     navigate("/");
   }
 
+  async function handleModalChoise(choise) {
+    debugger;
+    if (choise) {
+      try {
+        await api.delete(`incidents/${deleteIncidentId}`, {
+          headers: {
+            Authorization: ongId,
+          },
+        });
+
+        setIncidents(
+          incidents.filter((incident) => incident.id !== deleteIncidentId)
+        );
+      } catch (err) {
+        alert("Erro ao deleter caso. Tente novamente.");
+      }
+    } else setDeleteInidentId("");
+  }
+
   return (
     <div className="h-screen w-full m-auto max-w-5xl flex items-center justify-center">
-      <div className="absolute top-0 w-full max-w-6xl px-0 py-8 mx-8 my-auto">
-        <header className="flex items-center">
-          <img className="h-16" src={logoImg} alt="Be The Hero" />
-          <span className="text-xl ml-6">Bem Vinda, {ongName}</span>
+      <Modal onHandleChoise={handleModalChoise} />
 
-          <Link className="button w-64 ml-auto mt-0" to="/incidents/new">
-            Cadastrar novo caso
-          </Link>
-          <button
-            className="flex justify-center items-center h-14 w-14 rounded border bg-transparent ml-4 transition hover:bg-slate-100"
-            onClick={handleLogout}
-            type="button"
-          >
-            <FiPower size={18} color="#E02041" />
-          </button>
+      <div className="absolute top-0 w-full max-w-6xl px-0 py-8 mx-8 my-auto">
+        <header className="flex items-center justify-between">
+          <div className="flex items-center">
+            <img className="h-16" src={logoImg} alt="Be The Hero" />
+            <span className="text-xl ml-6">Bem Vinda, {ongName}</span>
+          </div>
+
+          <div className="flex items-center">
+            <Link
+              className="bg-red-500 h-14 text-lg hover:bg-red-700 text-white items-center font-semibold flex py-2 px-4 rounded"
+              to="/incidents/new"
+            >
+              Cadastrar novo caso
+            </Link>
+            <button
+              className="flex justify-center items-center h-14 w-14 rounded border bg-transparent ml-4 transition hover:bg-slate-100"
+              onClick={handleLogout}
+              type="button"
+            >
+              <FiPower size={18} color="#E02041" />
+            </button>
+          </div>
         </header>
 
         <h1 className="mt-20 mb-6">Casos cadastrados:</h1>
