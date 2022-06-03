@@ -45,5 +45,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }
