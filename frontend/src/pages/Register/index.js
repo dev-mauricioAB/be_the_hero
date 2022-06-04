@@ -71,8 +71,11 @@ export default function Register() {
             os casos de sua ONG.
           </p>
 
-          <Link className="back-link w-max" to="/">
-            <FiArrowLeft size={16} color="#E02041" />
+          <Link
+            className="flex mt-5 text-lg items-center text-[#41414d]"
+            to="/"
+          >
+            <FiArrowLeft className="mr-2" size={16} color="#E02041" />
             <span>Voltar para Home</span>
           </Link>
         </section>
@@ -213,7 +216,10 @@ export default function Register() {
             />
           </div>
 
-          <button className="button cursor-pointer bg-red-500" type="submit">
+          <button
+            className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
             Cadastrar
           </button>
         </form>
