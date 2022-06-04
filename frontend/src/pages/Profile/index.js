@@ -5,6 +5,7 @@ import { FiPower, FiTrash2 } from "react-icons/fi";
 import api from "../../services/api";
 import Modal from "../../components/Modal";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
+import { LoadingCard } from "../../components/LoadingCard";
 
 import logoImg from "../../assets/logo.svg";
 import heroImg from "../../assets/hero.png";
@@ -13,7 +14,8 @@ export default function Profile() {
   const [incidents, setIncidents] = useState([]);
   const [incidentSelected, setIncidentSelected] = useState(null);
   const [deleteIncidentId, setDeleteInidentId] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loadingDeleteCase, setLoadingDeleteCase] = useState(false);
+  const [loadingCases, setLoadingCases] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,6 +23,7 @@ export default function Profile() {
   const ongName = localStorage.getItem("ongName");
 
   useEffect(() => {
+    setLoadingCases(true);
     api
       .get("profile", {
         headers: {
@@ -29,12 +32,13 @@ export default function Profile() {
       })
       .then((response) => {
         setIncidents(response.data);
+        setLoadingCases(false);
       });
   }, [ongId]);
 
   async function handleDeleteIncident(id) {
     updateIncidentsValues(id);
-    setLoading(true);
+    setLoadingDeleteCase(true);
     document.getElementById("staticBackdropButton").click();
   }
 
@@ -56,14 +60,14 @@ export default function Profile() {
         setIncidents(
           incidents.filter((incident) => incident.id !== deleteIncidentId)
         );
-        setLoading(false);
+        setLoadingDeleteCase(false);
       } catch (err) {
-        setLoading(false);
+        setLoadingDeleteCase(false);
         alert("Erro ao deleter caso. Tente novamente.");
       }
     } else {
       setDeleteInidentId("");
-      setLoading(false);
+      setLoadingDeleteCase(false);
     }
   }
 
@@ -104,7 +108,10 @@ export default function Profile() {
           <h1 className="mt-20 mb-6">Casos cadastrados:</h1>
         )}
         <ul className="grid grid-cols-3 gap-3 list-none">
-          {incidents.length > 0 &&
+          {loadingCases ? (
+            <LoadingCard />
+          ) : (
+            incidents.length > 0 &&
             incidents.map((incident) => (
               <li
                 className="p-6 rounded relative shadow flex justify-between"
@@ -137,7 +144,7 @@ export default function Profile() {
                     onClick={() => handleDeleteIncident(incident.id)}
                     type="button"
                   >
-                    {incident.id === deleteIncidentId && loading ? (
+                    {incident.id === deleteIncidentId && loadingDeleteCase ? (
                       <LoadingSpinner />
                     ) : (
                       <FiTrash2 size={20} color="#a8a8b3" />
@@ -145,9 +152,10 @@ export default function Profile() {
                   </button>
                 </div>
               </li>
-            ))}
+            ))
+          )}
         </ul>
-        {incidents.length === 0 && (
+        {incidents.length === 0 && !loadingCases && (
           <div className="h-96 w-full flex justify-center items-center">
             <img src={heroImg} alt="Imagem de Super Herói" className="mr-10" />
           </div>
