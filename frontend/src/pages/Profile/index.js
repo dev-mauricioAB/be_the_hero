@@ -8,6 +8,7 @@ import logoImg from "../../assets/logo.svg";
 
 export default function Profile() {
   const [incidents, setIncidents] = useState([]);
+  const [incidentSelected, setIncidentSelected] = useState(null);
   const [deleteIncidentId, setDeleteInidentId] = useState("");
 
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function Profile() {
   }, [ongId]);
 
   async function handleDeleteIncident(id) {
-    setDeleteInidentId(id);
+    updateIncidentsValues(id);
     document.getElementById("staticBackdropButton").click();
   }
 
@@ -39,7 +40,6 @@ export default function Profile() {
   }
 
   async function handleModalChoise(choise) {
-    debugger;
     if (choise) {
       try {
         await api.delete(`incidents/${deleteIncidentId}`, {
@@ -57,9 +57,15 @@ export default function Profile() {
     } else setDeleteInidentId("");
   }
 
+  function updateIncidentsValues(id) {
+    setDeleteInidentId(id);
+    const incident = incidents.find((incident) => incident.id === id);
+    setIncidentSelected(incident);
+  }
+
   return (
     <div className="h-screen w-full m-auto max-w-5xl flex items-center justify-center">
-      <Modal onHandleChoise={handleModalChoise} />
+      <Modal onHandleChoise={handleModalChoise} incident={incidentSelected} />
 
       <div className="absolute top-0 w-full max-w-6xl px-0 py-8 mx-8 my-auto">
         <header className="flex items-center justify-between">

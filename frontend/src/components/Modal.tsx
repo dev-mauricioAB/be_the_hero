@@ -1,16 +1,17 @@
 import React from "react";
 
-interface ICase {
+interface IIncident {
   title: string;
   description: string;
+  value: string;
 }
 
 interface IModal {
-  caseProps: ICase;
   onHandleChoise: (choise: boolean) => void;
+  incident: IIncident;
 }
 
-const Modal: React.FC<IModal> = ({ caseProps, onHandleChoise }) => {
+const Modal: React.FC<IModal> = ({ onHandleChoise, incident }) => {
   return (
     <>
       <button
@@ -37,11 +38,11 @@ const Modal: React.FC<IModal> = ({ caseProps, onHandleChoise }) => {
                 className="text-xl font-medium leading-normal text-gray-800"
                 id="exampleModalLabel"
               >
-                Modal title
+                Deletar '{incident?.title}'
               </h5>
             </div>
             <div className="modal-body relative p-4">
-              Deseja realmente deletar esse caso? (colocar o nome do caso)
+              Deseja realmente deletar o caso '{incident?.title}'?
             </div>
             <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
               <button
