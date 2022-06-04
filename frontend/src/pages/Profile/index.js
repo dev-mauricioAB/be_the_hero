@@ -4,6 +4,8 @@ import { FiPower, FiTrash2 } from "react-icons/fi";
 
 import api from "../../services/api";
 import Modal from "../../components/Modal";
+import { LoadingSpinner } from "../../components/LoadingSpinner";
+
 import logoImg from "../../assets/logo.svg";
 import heroImg from "../../assets/hero.png";
 
@@ -11,6 +13,7 @@ export default function Profile() {
   const [incidents, setIncidents] = useState([]);
   const [incidentSelected, setIncidentSelected] = useState(null);
   const [deleteIncidentId, setDeleteInidentId] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -31,6 +34,7 @@ export default function Profile() {
 
   async function handleDeleteIncident(id) {
     updateIncidentsValues(id);
+    setLoading(true);
     document.getElementById("staticBackdropButton").click();
   }
 
@@ -52,10 +56,15 @@ export default function Profile() {
         setIncidents(
           incidents.filter((incident) => incident.id !== deleteIncidentId)
         );
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
         alert("Erro ao deleter caso. Tente novamente.");
       }
-    } else setDeleteInidentId("");
+    } else {
+      setDeleteInidentId("");
+      setLoading(false);
+    }
   }
 
   function updateIncidentsValues(id) {
@@ -128,7 +137,11 @@ export default function Profile() {
                     onClick={() => handleDeleteIncident(incident.id)}
                     type="button"
                   >
-                    <FiTrash2 size={20} color="#a8a8b3" />
+                    {incident.id === deleteIncidentId && loading ? (
+                      <LoadingSpinner />
+                    ) : (
+                      <FiTrash2 size={20} color="#a8a8b3" />
+                    )}
                   </button>
                 </div>
               </li>
