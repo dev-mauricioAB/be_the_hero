@@ -4,6 +4,7 @@ import { FiLogIn } from "react-icons/fi";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 import Toast, { showToast } from "../../components/Toast";
+import { Input } from "../../components/Input";
 
 import api from "../../services/api";
 import { loginSchema } from "../../validations/form";
@@ -58,99 +59,58 @@ export default function Logon() {
 
   return (
     <div className="flex sm:flex-col md:flex-row mt-0 sm:pt-2 justify-center items-center ">
-      <section>
+      <section className="w-full max-w-sm">
         <img src={logoImg} alt="Be The Hero" className="mb-8" />
 
         <h1 className="text-2xl mb-2">Faça seu Logon</h1>
 
-        <div className="w-80">
-          <form
-            onSubmit={handleLogin}
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            <div className="mb-2">
-              <input
-                value={id}
-                onChange={(e) => setId(e.target.value)}
-                className="                  
-                  block
-                  w-full
-                  h-14
-                  px-3
-                  py-1.5
-                  text-base
-                  font-normal
-                  text-gray-700
-                  bg-white bg-clip-padding
-                  border border-solid border-gray-300
-                  rounded
-                  transition
-                  ease-in-out
-                  m-0
-                  invalid:border-pink-500         
-                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="id"
-                type="text"
-                placeholder="Seu ID"
+        <Input
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+          label={"Seu ID"}
+          inputId={"id"}
+          type={"text"}
+          placeholder="Seu ID"
+        />
+        <div className="w-full justify-center items-center hidden">
+          <Input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            inputId={"password"}
+            type={showPassword === false ? "password" : "text"}
+            placeholder={showPassword === false ? "*******" : "Sua senha"}
+          />
+          <div className="text-2xl absolute ml-[17rem]">
+            {showPassword === false ? (
+              <AiFillEye
+                onClick={handleShowPassword}
+                color="#585858"
+                cursor="pointer"
               />
-            </div>
-            <div className="w-full justify-center items-center hidden">
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="
-                  form-control block
-                  w-full
-                  h-14
-                  px-3
-                  py-1.5
-                  text-base
-                  font-normal
-                  text-gray-700
-                  bg-white bg-clip-padding
-                  border border-solid border-gray-300
-                  rounded
-                  transition
-                  ease-in-out
-                  m-0
-                  invalid:border-pink-500
-                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                id="password"
-                type={showPassword === false ? "password" : "text"}
-                placeholder={showPassword === false ? "*******" : "Sua senha"}
+            ) : (
+              <AiFillEyeInvisible
+                onClick={handleShowPassword}
+                color="#585858"
+                cursor="pointer"
               />
-              <div className="text-2xl absolute ml-[17rem]">
-                {showPassword === false ? (
-                  <AiFillEye
-                    onClick={handleShowPassword}
-                    color="#585858"
-                    cursor="pointer"
-                  />
-                ) : (
-                  <AiFillEyeInvisible
-                    onClick={handleShowPassword}
-                    color="#585858"
-                    cursor="pointer"
-                  />
-                )}
-              </div>
-            </div>
-            <button
-              className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-              type="submit"
-            >
-              Entrar
-            </button>
-
-            <Link
-              className="flex mt-5 text-lg items-center text-[#41414d]"
-              to="./register"
-            >
-              <FiLogIn size={16} color="#E02041" className="mr-2" />
-              Não tenho cadastro
-            </Link>
-          </form>
+            )}
+          </div>
         </div>
+        <button
+          className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          type="submit"
+          onClick={handleLogin}
+        >
+          Entrar
+        </button>
+
+        <Link
+          className="flex mt-5 text-lg items-center text-[#41414d]"
+          to="./register"
+        >
+          <FiLogIn size={16} color="#E02041" className="mr-2" />
+          Não tenho cadastro
+        </Link>
       </section>
 
       <section className="min-h-screen flex items-center justify-center px-16">
