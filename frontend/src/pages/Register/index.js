@@ -4,7 +4,10 @@ import { FiArrowLeft } from "react-icons/fi";
 
 import api from "../../services/api";
 import { registerSchema } from "../../validations/form";
+
 import Toast, { showToast } from "../../components/Toast";
+import { Input } from "../../components/Input";
+
 import { UF } from "../../utils/constants";
 
 import logoImg from "../../assets/logo.svg";
@@ -80,109 +83,59 @@ export default function Register() {
           </Link>
         </section>
 
-        <form className="w-full max-w-md ml-3" onSubmit={handleRegister}>
-          <input
-            className="
-            font-normal
-            shadow 
-            appearance-none 
-            rounded
-            text-base
-            w-full 
-            h-14
-            py-2 
-            px-3 
-            border border-solid border-gray-300
-            leading-tight 
-            focus:shadow-outline 
-            mb-2
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+        <div className="w-full max-w-md ml-3">
+          <Input
             placeholder="Nome da ONG"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            inputId={"ongName"}
+            label={"Nome da ONG"}
+            type={"text"}
           />
-          <input
-            className="
-            font-normal
-            shadow 
-            appearance-none 
-            rounded
-            text-base
-            w-full 
-            h-14
-            py-2 
-            px-3 
-            border border-solid border-gray-300
-            leading-tight 
-            focus:shadow-outline 
-            mb-2
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            type="email"
+          <Input
+            inputId={"email"}
+            label={"E-mail"}
+            type={"email"}
             placeholder="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input
-            className="
-            font-normal
-            shadow 
-            appearance-none 
-            rounded
-            text-base
-            w-full 
-            h-14
-            py-2 
-            px-3 
-            border border-solid border-gray-300
-            leading-tight 
-            focus:shadow-outline 
-            mb-2
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            placeholder="Whatsapp"
+          <Input
+            inputId={"whatsapp"}
+            label={"Whastapp"}
+            type={"text"}
+            placeholder="Whastapp"
             value={whatsapp}
             onChange={(e) => setWhatsapp(e.target.value)}
           />
 
           <div className="flex">
-            <input
-              className="
-              font-normal
-              shadow 
-              appearance-none 
-              rounded
-              text-base
-              w-full 
-              h-14
-              py-2 
-              px-3 
-              border border-solid border-gray-300
-              leading-tight 
-              focus:shadow-outline 
-              mb-2
-              mr-2
-              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            <Input
+              inputId={"cidade"}
+              label={"Cidade"}
+              type={"text"}
               placeholder="Cidade"
               value={city}
               onChange={(e) => setCity(e.target.value)}
+              style={{ width: "22rem" }}
             />
             <select
               className="
-              font-normal
-              shadow 
-              appearance-none 
-              rounded
-              text-base
-              w-full 
-              h-14
-              py-2 
-              px-3 
-              border border-solid border-gray-300
-              leading-tight 
-              focus:shadow-outline 
-              mb-2
-              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                font-normal
+                shadow 
+                appearance-none 
+                rounded
+                text-base
+                w-20  
+                py-2 
+                px-3 
+                border border-solid border-gray-300
+                leading-tight 
+                focus:shadow-outline 
+                mb-2
+                ml-2
+                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               placeholder="UF"
-              style={{ width: 80 }}
               value={uf}
               onChange={(e) => setUf(e.target.value)}
             >
@@ -193,36 +146,23 @@ export default function Register() {
               ))}
             </select>
           </div>
-          <div className="input-password">
-            <input
-              className="
-              font-normal
-              shadow 
-              appearance-none 
-              rounded
-              text-base
-              w-full 
-              h-14
-              py-2 
-              px-3 
-              border border-solid border-gray-300
-              leading-tight 
-              focus:shadow-outline 
-              mb-2
-              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <Input
+            inputId={"password"}
+            label={"Password"}
+            type={"text"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
           <button
             className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             type="submit"
+            onClick={handleRegister}
           >
             Cadastrar
           </button>
-        </form>
+        </div>
       </div>
 
       <Toast />
