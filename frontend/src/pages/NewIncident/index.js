@@ -70,7 +70,10 @@ export default function NewIncident() {
             resolver isso.
           </p>
 
-          <Link className="back-link" to="/profile">
+          <Link
+            className="flex mt-5 text-lg items-center text-[#41414d]"
+            to="/profile"
+          >
             <FiArrowLeft size={16} color="#E02041" />
             Voltar para home
           </Link>
@@ -145,7 +148,10 @@ export default function NewIncident() {
             value={value}
           />
 
-          <button className="button bg-red-500" type="submit">
+          <button
+            className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
             Cadastrar
           </button>
         </form>

@@ -5,6 +5,9 @@ module.exports = {
       animation: {
         blob: "blob 7s infinite",
       },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+      },
       keyframes: {
         blob: {
           "0%": {
@@ -23,5 +26,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/forms")]
-}
+  plugins: [require("@tailwindcss/forms")],
+};
