@@ -125,7 +125,7 @@ export default function NewIncident() {
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          {value && <span className="absolute text-lg mt-[13px] ml-3">R$</span>}
+          {value && <span className="absolute text-lg mt-[15px] ml-3">R$</span>}
           <Input
             mask="currency"
             placeholder="R$ 0,00"
