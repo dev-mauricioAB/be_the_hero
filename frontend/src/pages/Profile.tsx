@@ -2,24 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiPower, FiTrash2 } from "react-icons/fi";
 
-import api from "../../services/api";
-import Modal from "../../components/Modal";
-import { LoadingSpinner } from "../../components/LoadingSpinner";
-import { LoadingCard } from "../../components/LoadingCard";
+import api from "../services/api";
 
-import logoImg from "../../assets/logo.svg";
-import heroImg from "../../assets/hero.png";
+import Modal from "../components/Modal";
+import { LoadingSpinner } from "../components/LoadingSpinner";
+import { LoadingCard } from "../components/LoadingCard";
+
+import { IncidentProps } from "../models/Incident";
+
+import logoImg from "../assets/logo.svg";
+import heroImg from "../assets/hero.png";
 
 export default function Profile() {
-  const [incidents, setIncidents] = useState([]);
-  const [incidentSelected, setIncidentSelected] = useState(null);
+  const [incidents, setIncidents] = useState<IncidentProps[]>([]);
+  const [incidentSelected, setIncidentSelected] = useState<IncidentProps>();
   const [deleteIncidentId, setDeleteInidentId] = useState("");
   const [loadingDeleteCase, setLoadingDeleteCase] = useState(false);
   const [loadingCases, setLoadingCases] = useState(false);
 
   const navigate = useNavigate();
 
-  const ongId = localStorage.getItem("ongId");
+  const ongId = localStorage.getItem("ongId") as string | number | boolean;
   const ongName = localStorage.getItem("ongName");
 
   useEffect(() => {
@@ -36,10 +39,13 @@ export default function Profile() {
       });
   }, [ongId]);
 
-  async function handleDeleteIncident(id) {
+  async function handleDeleteIncident(id: string) {
     updateIncidentsValues(id);
     setLoadingDeleteCase(true);
-    document.getElementById("staticBackdropButton").click();
+
+    const modalButton = document.getElementById("staticBackdropButton");
+
+    if (modalButton) modalButton.click();
   }
 
   function handleLogout() {
@@ -48,7 +54,7 @@ export default function Profile() {
     navigate("/");
   }
 
-  async function handleModalChoise(choise) {
+  async function handleModalChoise(choise: boolean) {
     if (choise) {
       try {
         await api.delete(`incidents/${deleteIncidentId}`, {
@@ -71,9 +77,10 @@ export default function Profile() {
     }
   }
 
-  function updateIncidentsValues(id) {
+  function updateIncidentsValues(id: string) {
     setDeleteInidentId(id);
     const incident = incidents.find((incident) => incident.id === id);
+
     setIncidentSelected(incident);
   }
 

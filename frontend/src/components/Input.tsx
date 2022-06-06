@@ -1,16 +1,15 @@
 import React, {
-  HTMLInputTypeAttribute,
   KeyboardEventHandler,
   useCallback,
+  InputHTMLAttributes,
 } from "react";
 
 import { currency, phone } from "../utils/masks";
 
-interface IInput {
-  mask: "currency" | "phone";
-  label: string;
+interface IInput extends InputHTMLAttributes<HTMLInputElement> {
+  mask?: "currency" | "phone";
+  label?: string;
   inputId: string;
-  type: HTMLInputTypeAttribute;
 }
 
 export const Input = ({ mask, label, type, inputId, ...props }: IInput) => {
@@ -26,7 +25,6 @@ export const Input = ({ mask, label, type, inputId, ...props }: IInput) => {
       <input
         {...props}
         onKeyUp={handleKeyUp}
-        type={type}
         id={inputId}
         className="form-control
           block

@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
-import Toast, { showToast } from "../../components/Toast";
-import { Input } from "../../components/Input";
+import Toast, { showToast } from "../components/Toast";
+import { Input } from "../components/Input";
 
-import api from "../../services/api";
-import { loginSchema } from "../../validations/form";
+import api from "../services/api";
+import { loginSchema } from "../validations/form";
 
-import "./styles.css";
-
-import herosImg from "../../assets/heroes.png";
-import logoImg from "../../assets/logo.svg";
+import herosImg from "../assets/heroes.png";
+import logoImg from "../assets/logo.svg";
 
 export default function Logon() {
   const [id, setId] = useState("");
@@ -21,18 +19,21 @@ export default function Logon() {
 
   const navigate = useNavigate();
 
-  const notify = (message) =>
+  const notify = (message: string) =>
     showToast({
       type: "error",
       message,
       config: {
         position: "top-center",
         className: "toast-login-error",
+        bodyStyle: {
+          color: "#000000",
+        },
       },
     });
 
-  async function handleLogin(e) {
-    e.preventDefault();
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
     const loginData = {
       id,
@@ -64,45 +65,49 @@ export default function Logon() {
 
         <h1 className="text-2xl mb-2">Faça seu Logon</h1>
 
-        <Input
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          label={"Seu ID"}
-          inputId={"id"}
-          type={"text"}
-          placeholder="Seu ID"
-        />
-        <div className="w-full justify-center items-center hidden">
-          <Input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            inputId={"password"}
-            type={showPassword === false ? "password" : "text"}
-            placeholder={showPassword === false ? "*******" : "Sua senha"}
-          />
-          <div className="text-2xl absolute ml-[17rem]">
-            {showPassword === false ? (
-              <AiFillEye
-                onClick={handleShowPassword}
-                color="#585858"
-                cursor="pointer"
-              />
-            ) : (
-              <AiFillEyeInvisible
-                onClick={handleShowPassword}
-                color="#585858"
-                cursor="pointer"
-              />
-            )}
-          </div>
-        </div>
-        <button
-          className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          type="submit"
-          onClick={handleLogin}
+        <form
+          className="w-full justify-center items-center"
+          onSubmit={handleLogin}
         >
-          Entrar
-        </button>
+          <Input
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            label={"Seu ID"}
+            inputId={"id"}
+            type="text"
+            placeholder="Seu ID"
+          />
+          <div className="hidden">
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              inputId={"password"}
+              type={showPassword === false ? "password" : "text"}
+              placeholder={showPassword === false ? "*******" : "Sua senha"}
+            />
+            <div className="text-2xl absolute ml-[17rem]">
+              {showPassword === false ? (
+                <AiFillEye
+                  onClick={handleShowPassword}
+                  color="#585858"
+                  cursor="pointer"
+                />
+              ) : (
+                <AiFillEyeInvisible
+                  onClick={handleShowPassword}
+                  color="#585858"
+                  cursor="pointer"
+                />
+              )}
+            </div>
+          </div>
+          <button
+            className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Entrar
+          </button>
+        </form>
 
         <Link
           className="flex mt-5 text-lg items-center text-[#41414d]"

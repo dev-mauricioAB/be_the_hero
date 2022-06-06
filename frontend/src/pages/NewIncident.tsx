@@ -1,26 +1,25 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
-import api from "../../services/api";
-import { newIncidentSchema } from "../../validations/form";
+import api from "../services/api";
+import { newIncidentSchema } from "../validations/form";
 
-import Toast, { showToast } from "../../components/Toast";
-import { Input } from "../../components/Input";
-import logoImg from "../../assets/logo.svg";
+import Toast, { showToast } from "../components/Toast";
+import { Input } from "../components/Input";
+
+import logoImg from "../assets/logo.svg";
 
 export default function NewIncident() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
 
-  const handleChange = (event) => setValue(event.target.value);
-
   const navigate = useNavigate();
 
-  const ongId = localStorage.getItem("ongId");
+  const ongId = localStorage.getItem("ongId") as string | number | boolean;
 
-  const notify = (message) =>
+  const notify = (message: string) =>
     showToast({
       type: "error",
       message,
@@ -30,8 +29,8 @@ export default function NewIncident() {
       },
     });
 
-  async function handleNewIncident(e) {
-    e.preventDefault();
+  async function handleNewIncident(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
     const data = {
       title,
@@ -43,6 +42,7 @@ export default function NewIncident() {
 
     if (formValid)
       try {
+        debugger;
         await api.post("incidents", data, {
           headers: {
             Authorization: ongId,
@@ -79,13 +79,16 @@ export default function NewIncident() {
           </Link>
         </section>
 
-        <div className="flex justify-center flex-col w-full max-w-md ">
+        <form
+          className="flex justify-center flex-col w-full max-w-md"
+          onSubmit={handleNewIncident}
+        >
           <Input
             value={title}
             inputId={"title"}
             label={"Título do caso"}
             placeholder="Título do caso"
-            type={"text"}
+            type="text"
             onChange={(e) => setTitle(e.target.value)}
           />
 
@@ -115,22 +118,21 @@ export default function NewIncident() {
 
           <Input
             mask="currency"
-            onChange={handleChange}
+            onChange={(event) => setValue(event.target.value)}
             placeholder="R$"
             inputId={"title"}
             label={"R$"}
-            type={"text"}
+            type="text"
             className={`${value ? "px-9" : "px-3"} `}
             value={value}
           />
           <button
             className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             type="submit"
-            onClick={handleNewIncident}
           >
             Cadastrar
           </button>
-        </div>
+        </form>
       </div>
 
       <Toast />

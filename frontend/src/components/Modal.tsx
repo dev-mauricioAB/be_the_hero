@@ -1,14 +1,9 @@
 import React from "react";
-
-interface IIncident {
-  title: string;
-  description: string;
-  value: string;
-}
+import { IncidentProps } from "../models/Incident";
 
 interface IModal {
   onHandleChoise: (choise: boolean) => void;
-  incident: IIncident;
+  incident: IncidentProps | undefined;
 }
 
 const Modal: React.FC<IModal> = ({ onHandleChoise, incident }) => {
