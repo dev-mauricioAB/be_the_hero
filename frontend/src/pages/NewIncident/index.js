@@ -4,9 +4,9 @@ import { FiArrowLeft } from "react-icons/fi";
 
 import api from "../../services/api";
 import { newIncidentSchema } from "../../validations/form";
-import Toast, { showToast } from "../../components/Toast";
-import Input from "../../components/Input";
 
+import Toast, { showToast } from "../../components/Toast";
+import { Input } from "../../components/Input";
 import logoImg from "../../assets/logo.svg";
 
 export default function NewIncident() {
@@ -79,25 +79,13 @@ export default function NewIncident() {
           </Link>
         </section>
 
-        <form className="w-full max-w-md" onSubmit={handleNewIncident}>
-          <input
-            className="
-              font-normal
-              shadow 
-              appearance-none 
-              rounded
-              text-base
-              w-full 
-              h-14
-              py-2 
-              px-3 
-              border border-solid border-gray-300
-              leading-tight 
-              focus:shadow-outline 
-              mb-2
-              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            placeholder="Título do caso"
+        <div className="flex justify-center flex-col w-full max-w-md ">
+          <Input
             value={title}
+            inputId={"title"}
+            label={"Título do caso"}
+            placeholder="Título do caso"
+            type={"text"}
             onChange={(e) => setTitle(e.target.value)}
           />
 
@@ -125,36 +113,24 @@ export default function NewIncident() {
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          {value && <span className="absolute text-lg mt-[13px] ml-3">R$</span>}
           <Input
             mask="currency"
-            placeholder="R$ 0,00"
             onChange={handleChange}
-            className={`
-              font-normal
-              shadow 
-              text-base
-              appearance-none 
-              rounded
-              w-full 
-              h-14
-              py-2 
-              ${value ? "px-9" : "px-3"} 
-              border border-solid border-gray-300
-              leading-tight 
-              focus:shadow-outline 
-              mb-1
-              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`}
+            placeholder="R$"
+            inputId={"title"}
+            label={"R$"}
+            type={"text"}
+            className={`${value ? "px-9" : "px-3"} `}
             value={value}
           />
-
           <button
             className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             type="submit"
+            onClick={handleNewIncident}
           >
             Cadastrar
           </button>
-        </form>
+        </div>
       </div>
 
       <Toast />
