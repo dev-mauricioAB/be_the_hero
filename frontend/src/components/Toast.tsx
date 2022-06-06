@@ -1,8 +1,14 @@
 import React from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer, ToastOptions } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const showToast = ({ type, message, config }) => {
+interface IToast {
+  type: "success" | "warn" | "error";
+  message: string;
+  config: ToastOptions;
+}
+
+export const showToast = ({ type, message, config }: IToast) => {
   switch (type) {
     case "success":
       toast.success(message, config && config);

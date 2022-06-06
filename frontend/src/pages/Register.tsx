@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
-import api from "../../services/api";
-import { registerSchema } from "../../validations/form";
+import api from "../services/api";
+import { registerSchema } from "../validations/form";
 
-import Toast, { showToast } from "../../components/Toast";
-import { Input } from "../../components/Input";
+import Toast, { showToast } from "../components/Toast";
+import { Input } from "../components/Input";
 
-import { UF } from "../../utils/constants";
+import { UF } from "../utils/constants";
 
-import logoImg from "../../assets/logo.svg";
+import logoImg from "../assets/logo.svg";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -22,7 +22,7 @@ export default function Register() {
 
   const navigate = useNavigate();
 
-  const notify = (message) =>
+  const notify = (message: string) =>
     showToast({
       type: "error",
       message,
@@ -32,8 +32,8 @@ export default function Register() {
       },
     });
 
-  async function handleRegister(e) {
-    e.preventDefault();
+  async function handleRegister(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
     const data = {
       password,
@@ -83,19 +83,19 @@ export default function Register() {
           </Link>
         </section>
 
-        <div className="w-full max-w-md ml-3">
+        <form className="w-full max-w-md ml-3" onSubmit={handleRegister}>
           <Input
             placeholder="Nome da ONG"
             value={name}
             onChange={(e) => setName(e.target.value)}
             inputId={"ongName"}
             label={"Nome da ONG"}
-            type={"text"}
+            type="text"
           />
           <Input
             inputId={"email"}
             label={"E-mail"}
-            type={"email"}
+            type="email"
             placeholder="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -103,7 +103,7 @@ export default function Register() {
           <Input
             inputId={"whatsapp"}
             label={"Whastapp"}
-            type={"text"}
+            type="text"
             placeholder="Whastapp"
             mask="phone"
             value={whatsapp}
@@ -114,7 +114,7 @@ export default function Register() {
             <Input
               inputId={"cidade"}
               label={"Cidade"}
-              type={"text"}
+              type="text"
               placeholder="Cidade"
               value={city}
               onChange={(e) => setCity(e.target.value)}
@@ -150,7 +150,7 @@ export default function Register() {
           <Input
             inputId={"password"}
             label={"Password"}
-            type={"text"}
+            type="text"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -159,11 +159,10 @@ export default function Register() {
           <button
             className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             type="submit"
-            onClick={handleRegister}
           >
             Cadastrar
           </button>
-        </div>
+        </form>
       </div>
 
       <Toast />
