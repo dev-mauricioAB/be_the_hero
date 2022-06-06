@@ -39,7 +39,7 @@ export default function Register() {
       password,
       name,
       email,
-      whatsapp,
+      whatsapp: whatsapp.replace(/\D/g, ""),
       city,
       uf,
     };
@@ -105,6 +105,7 @@ export default function Register() {
             label={"Whastapp"}
             type={"text"}
             placeholder="Whastapp"
+            mask="phone"
             value={whatsapp}
             onChange={(e) => setWhatsapp(e.target.value)}
           />

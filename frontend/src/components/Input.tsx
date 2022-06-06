@@ -1,14 +1,13 @@
 import React, {
-  CSSProperties,
   HTMLInputTypeAttribute,
   KeyboardEventHandler,
   useCallback,
 } from "react";
 
-import { currency } from "../utils/masks";
+import { currency, phone } from "../utils/masks";
 
 interface IInput {
-  mask: string;
+  mask: "currency" | "phone";
   label: string;
   inputId: string;
   type: HTMLInputTypeAttribute;
@@ -16,7 +15,9 @@ interface IInput {
 
 export const Input = ({ mask, label, type, inputId, ...props }: IInput) => {
   const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = useCallback(
-    (event) => mask === "currency" && currency(event),
+    (event) =>
+      (mask === "currency" && currency(event)) ||
+      (mask === "phone" && phone(event)),
     [mask]
   );
 
