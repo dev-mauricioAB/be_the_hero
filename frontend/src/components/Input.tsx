@@ -2,6 +2,7 @@ import React, {
   KeyboardEventHandler,
   useCallback,
   InputHTMLAttributes,
+  FocusEventHandler,
 } from "react";
 
 import { currency, phone } from "../utils/masks";
@@ -13,7 +14,7 @@ interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = ({ mask, label, type, inputId, ...props }: IInput) => {
-  const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = useCallback(
+  const handleKeyUp: FocusEventHandler<HTMLInputElement> = useCallback(
     (event) =>
       (mask === "currency" && currency(event)) ||
       (mask === "phone" && phone(event)),
@@ -24,7 +25,7 @@ export const Input = ({ mask, label, type, inputId, ...props }: IInput) => {
     <div className="form-floating mb-2 max-w-md">
       <input
         {...props}
-        onKeyUp={handleKeyUp}
+        onBlur={handleKeyUp}
         id={inputId}
         className="form-control
           block

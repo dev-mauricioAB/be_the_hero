@@ -1981,6 +1981,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-text-mask@^5.4.11":
+  "integrity" "sha512-DIJ3/dS4jd7NK3lEgsOwcgpp+ZlVrNJEiUDRayZRE/PNMbV/nLWmOKGdL0BUS29hnx0CDgITgPudKx0BgbF5fA=="
+  "resolved" "https://registry.npmjs.org/@types/react-text-mask/-/react-text-mask-5.4.11.tgz"
+  "version" "5.4.11"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^18.0.11":
   "integrity" "sha512-JxSwm54IgMW4XTR+zFF5QpNx4JITmFbB4WHR2J0vg9RpjNeyqEMlODXsD2e64br6GX70TL0UYjZJETpyyC1WdA=="
   "resolved" "https://registry.npmjs.org/@types/react/-/react-18.0.11.tgz"
@@ -7599,7 +7606,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.8.1":
+"prop-types@^15.5.6", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -7847,6 +7854,13 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
+"react-text-mask@^5.4.3":
+  "integrity" "sha512-IQ26CO6YMhc2FBRxLVnckBEDkuMvBQOiHBeAxWdZzoqMMOQvGG6vrVW1Rv6RtqOYsqVQaQd+6zYDW2tEM8VXxA=="
+  "resolved" "https://registry.npmjs.org/react-text-mask/-/react-text-mask-5.4.3.tgz"
+  "version" "5.4.3"
+  dependencies:
+    "prop-types" "^15.5.6"
+
 "react-toastify@^9.0.3":
   "integrity" "sha512-0QZJk0SqYBxouRBGCFU3ymvjlwimRRhVH7SzqGRiVrQ001KSoUNbGKx9Yq42aoPv18n45yJzEFG82zqv3HnASg=="
   "resolved" "https://registry.npmjs.org/react-toastify/-/react-toastify-9.0.3.tgz"
@@ -7854,7 +7868,7 @@
   dependencies:
     "clsx" "^1.1.1"
 
-"react@*", "react@^18.0.0", "react@^18.1.0", "react@>= 16", "react@>=16", "react@>=16.8":
+"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^18.0.0", "react@^18.1.0", "react@>= 16", "react@>=16", "react@>=16.8":
   "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
   "version" "18.1.0"
@@ -8911,6 +8925,11 @@
     "@istanbuljs/schema" "^0.1.2"
     "glob" "^7.1.4"
     "minimatch" "^3.0.4"
+
+"text-mask-addons@^3.8.0":
+  "integrity" "sha1-F7Ye9mWk82gR8uofAaIjtL5hqyY="
+  "resolved" "https://registry.npmjs.org/text-mask-addons/-/text-mask-addons-3.8.0.tgz"
+  "version" "3.8.0"
 
 "text-table@^0.2.0":
   "integrity" "sha1-f17oI66AUgfACvLfSoTsP8+lcLQ="

@@ -7,6 +7,7 @@ import { newIncidentSchema } from "../validations/form";
 
 import Toast, { showToast } from "../components/Toast";
 import { Input } from "../components/Input";
+import CurrencyInput from "../components/CurrencyInput";
 
 import logoImg from "../assets/logo.svg";
 
@@ -35,14 +36,14 @@ export default function NewIncident() {
     const data = {
       title,
       description,
-      value,
+      value: parseFloat(value.replace("R$", "")).toFixed(2),
     };
+    debugger;
 
     const formValid = await newIncidentSchema.isValid(data);
 
     if (formValid)
       try {
-        debugger;
         await api.post("incidents", data, {
           headers: {
             Authorization: ongId,
@@ -116,15 +117,27 @@ export default function NewIncident() {
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <Input
-            mask="currency"
-            onChange={(event) => setValue(event.target.value)}
-            placeholder="R$"
-            inputId={"title"}
-            label={"R$"}
+          <CurrencyInput
+            placeholder="R$ 0,00"
             type="text"
-            className={`${value ? "px-9" : "px-3"} `}
+            onChange={(event) => setValue(event.target.value)}
             value={value}
+            className="form-control
+              block
+              w-full
+              px-3
+              py-1.5
+              text-base
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding
+              border border-solid border-gray-300
+              rounded
+              transition
+              shadow
+              ease-in-out
+              m-0
+              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           />
           <button
             className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"

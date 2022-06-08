@@ -1,13 +1,13 @@
 import { FormEvent } from "react";
 
-export const currency = (event: FormEvent<HTMLInputElement>) => {
-  let value = event.currentTarget.value;
+export const currency = (e: FormEvent<HTMLInputElement>) => {
+  let value = e.currentTarget.value;
   value = value.replace(/\D/g, "");
   value = value.replace(/(\d)(\d{2})$/, "$1,$2");
   value = value.replace(/(?=(\d{3})+(\D))\B/g, ".");
 
-  event.currentTarget.value = value;
-  return event;
+  e.currentTarget.value = value;
+  return e;
 };
 
 export const phone = (event: FormEvent<HTMLInputElement>) => {
