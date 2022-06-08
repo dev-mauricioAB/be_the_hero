@@ -38,7 +38,6 @@ export default function NewIncident() {
       description,
       value: parseFloat(value.replace("R$", "")).toFixed(2),
     };
-    debugger;
 
     const formValid = await newIncidentSchema.isValid(data);
 
