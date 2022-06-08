@@ -1,5 +1,4 @@
 import React, {
-  KeyboardEventHandler,
   useCallback,
   InputHTMLAttributes,
   FocusEventHandler,
