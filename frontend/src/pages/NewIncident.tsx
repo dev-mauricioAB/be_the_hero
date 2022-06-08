@@ -36,9 +36,8 @@ export default function NewIncident() {
     const data = {
       title,
       description,
-      value: parseFloat(value.replace("R$", "")).toFixed(2),
+      value: value && parseFloat(value.replace("R$", "")).toFixed(2),
     };
-    debugger;
 
     const formValid = await newIncidentSchema.isValid(data);
 
