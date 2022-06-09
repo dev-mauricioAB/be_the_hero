@@ -126,54 +126,63 @@ export default function Profile() {
         {incidents.length > 0 && (
           <h1 className="mt-20 mb-6">Casos cadastrados:</h1>
         )}
-        <ul className="grid grid-cols-3 gap-3 list-none">
+        <div className="grid grid-cols-3 gap-3 list-none">
           {loadingCases ? (
             <LoadingCard />
           ) : (
             incidents.length > 0 &&
             incidents.map((incident) => (
-              <li
-                className="p-6 rounded relative shadow flex justify-between"
-                key={incident.id}
-              >
-                <div>
-                  <strong className="block mb-1 text-zinc-600">CASO:</strong>
-                  <p className="text-zinc-500 leading-5 text-base mb-2">
-                    {incident.title}
-                  </p>
-
-                  <strong className="block mb-1 text-zinc-600">
-                    DESCRIÇÂO:
-                  </strong>
-                  <p className="text-zinc-500 leading-5 text-base mb-2">
-                    {incident.description}
-                  </p>
-
-                  <strong className="block mb-1 text-zinc-600">VALOR:</strong>
-                  <p className="text-zinc-500 leading-5 text-base mb-2">
-                    {Intl.NumberFormat("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    }).format(incident.value)}
-                  </p>
+              <div className="flex justify-center" key={incident.id}>
+                <div className="flex justify-between py-6 pl-4 pr-0 rounded-lg shadow-lg bg-white max-w-sm w-full">
+                  <div>
+                    <h5 className="text-zinc-700 text-xl leading-tight font-medium mb-2">
+                      {incident.title}
+                    </h5>
+                    <strong className="block mb-1 text-zinc-600">
+                      DESCRIÇÂO:
+                    </strong>
+                    <p className="text-zinc-500 leading-5 text-base mb-2">
+                      {incident.description}
+                    </p>
+                    <strong className="block mb-1 text-zinc-600">VALOR:</strong>
+                    <p className="text-zinc-500 leading-5 text-base mb-2">
+                      {Intl.NumberFormat("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      }).format(incident.value)}
+                    </p>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      className="
+                        inline-block 
+                        px-3
+                        text-white 
+                        font-medium 
+                        text-xs 
+                        leading-tight 
+                        uppercase 
+                        rounded 
+                        transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+                      onClick={() => handleDeleteIncident(incident.id)}
+                    >
+                      {incident.id === deleteIncidentId && loadingDeleteCase ? (
+                        <LoadingSpinner />
+                      ) : (
+                        <FiTrash2
+                          className="transition duration-0 hover:duration-150"
+                          size={20}
+                          color="#a8a8b3"
+                        />
+                      )}
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <button
-                    className="border-0 hover:opacity-80"
-                    onClick={() => handleDeleteIncident(incident.id)}
-                    type="button"
-                  >
-                    {incident.id === deleteIncidentId && loadingDeleteCase ? (
-                      <LoadingSpinner />
-                    ) : (
-                      <FiTrash2 size={20} color="#a8a8b3" />
-                    )}
-                  </button>
-                </div>
-              </li>
+              </div>
             ))
           )}
-        </ul>
+        </div>
         {incidents.length === 0 && !loadingCases && (
           <div className="h-96 w-full flex justify-center items-center">
             <img src={heroImg} alt="Imagem de Super Herói" className="mr-10" />
