@@ -97,7 +97,19 @@ export default function Profile() {
 
           <div className="flex items-center">
             <Link
-              className="bg-red-500 h-14 text-lg hover:bg-red-700 text-white items-center font-semibold flex py-2 px-4 rounded"
+              className="
+              h-14 
+              text-lg 
+              text-white 
+              items-center 
+              font-medium
+              leading-tight              
+              flex 
+              py-2 
+              px-4 
+              rounded
+              bg-red-500 
+              hover:bg-red-700"
               to="/incidents/new"
             >
               Cadastrar novo caso

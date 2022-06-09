@@ -8,6 +8,7 @@ import { newIncidentSchema } from "../validations/form";
 import Toast, { showToast } from "../components/Toast";
 import { Input } from "../components/Input";
 import CurrencyInput from "../components/CurrencyInput";
+import { Button } from "../components/Button";
 
 import logoImg from "../assets/logo.svg";
 
@@ -30,9 +31,7 @@ export default function NewIncident() {
       },
     });
 
-  async function handleNewIncident(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
+  async function handleNewIncident() {
     const data = {
       title,
       description,
@@ -136,14 +135,15 @@ export default function NewIncident() {
               shadow
               ease-in-out
               m-0
+              mb-2
               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           />
-          <button
-            className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          <Button
+            label="Cadastrar"
+            color="red"
             type="submit"
-          >
-            Cadastrar
-          </button>
+            onClick={handleNewIncident}
+          />
         </form>
       </div>
 
