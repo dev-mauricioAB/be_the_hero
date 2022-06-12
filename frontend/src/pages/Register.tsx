@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
@@ -7,6 +7,7 @@ import { registerSchema } from "../validations/form";
 
 import Toast, { showToast } from "../components/Toast";
 import { Input } from "../components/Input";
+import { Button } from "../components/Button";
 
 import { UF } from "../utils/constants";
 
@@ -32,9 +33,7 @@ export default function Register() {
       },
     });
 
-  async function handleRegister(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
+  async function handleRegister() {
     const data = {
       password,
       name,
@@ -83,7 +82,7 @@ export default function Register() {
           </Link>
         </section>
 
-        <form className="w-full max-w-md ml-3" onSubmit={handleRegister}>
+        <form className="w-full max-w-md ml-3">
           <Input
             placeholder="Nome da ONG"
             value={name}
@@ -135,6 +134,7 @@ export default function Register() {
                 focus:shadow-outline 
                 mb-2
                 ml-2
+                scrollbar-thumb-zinc-400 scrollbar-track-transparent scrollbar-thin
                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               placeholder="UF"
               value={uf}
@@ -156,12 +156,12 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button
-            className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          <Button
+            label="Cadastrar"
+            color="red"
             type="submit"
-          >
-            Cadastrar
-          </button>
+            onClick={handleRegister}
+          />
         </form>
       </div>
 

@@ -1,10 +1,11 @@
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 import Toast, { showToast } from "../components/Toast";
 import { Input } from "../components/Input";
+import { Button } from "../components/Button";
 
 import api from "../services/api";
 import { loginSchema } from "../validations/form";
@@ -32,9 +33,7 @@ export default function Logon() {
       },
     });
 
-  async function handleLogin(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
+  async function handleLogin() {
     const loginData = {
       id,
       password,
@@ -65,10 +64,7 @@ export default function Logon() {
 
         <h1 className="text-2xl mb-2">Faça seu Logon</h1>
 
-        <form
-          className="w-full justify-center items-center"
-          onSubmit={handleLogin}
-        >
+        <form className="w-full justify-center items-center">
           <Input
             value={id}
             onChange={(e) => setId(e.target.value)}
@@ -101,12 +97,12 @@ export default function Logon() {
               )}
             </div>
           </div>
-          <button
-            className="bg-red-500 w-full mt-2 h-[3.1rem] text-lg hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          <Button
+            label="Entrar"
+            color="red"
             type="submit"
-          >
-            Entrar
-          </button>
+            onClick={handleLogin}
+          />
         </form>
 
         <Link
