@@ -134,6 +134,7 @@ export default function Register() {
                 focus:shadow-outline 
                 mb-2
                 ml-2
+                scrollbar-thumb-zinc-400 scrollbar-track-transparent scrollbar-thin
                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               placeholder="UF"
               value={uf}
