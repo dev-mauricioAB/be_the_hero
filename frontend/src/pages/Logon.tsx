@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
@@ -6,17 +6,21 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import Toast, { showToast } from "../components/Toast";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
+import { Toggle } from "../components/Toggle";
+import { Animation } from "../components/Animation";
 
 import api from "../services/api";
 import { loginSchema } from "../validations/form";
 
-import herosImg from "../assets/heroes.png";
 import logoImg from "../assets/logo.svg";
+import logoImgLight from "../assets/logo_light.svg";
 
 export default function Logon() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const navigate = useNavigate();
 
@@ -58,74 +62,98 @@ export default function Logon() {
   const handleShowPassword = () => setShowPassword(!showPassword);
 
   return (
-    <div className="flex sm:flex-col md:flex-row mt-0 sm:pt-2 justify-center items-center ">
-      <section className="w-full max-w-sm">
-        <img src={logoImg} alt="Be The Hero" className="mb-8" />
-
-        <h1 className="text-2xl mb-2">Faça seu Logon</h1>
-
-        <form className="w-full justify-center items-center">
-          <Input
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            label={"Seu ID"}
-            inputId={"id"}
-            type="text"
-            placeholder="Seu ID"
-          />
-          <div className="hidden">
-            <Input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              inputId={"password"}
-              type={showPassword === false ? "password" : "text"}
-              placeholder={showPassword === false ? "*******" : "Sua senha"}
-            />
-            <div className="text-2xl absolute ml-[17rem]">
-              {showPassword === false ? (
-                <AiFillEye
-                  onClick={handleShowPassword}
-                  color="#585858"
-                  cursor="pointer"
-                />
-              ) : (
-                <AiFillEyeInvisible
-                  onClick={handleShowPassword}
-                  color="#585858"
-                  cursor="pointer"
-                />
-              )}
-            </div>
-          </div>
-          <Button
-            label="Entrar"
-            color="red"
-            type="submit"
-            onClick={handleLogin}
-          />
-        </form>
-
-        <Link
-          className="flex mt-5 text-lg items-center text-[#41414d]"
-          to="./register"
-        >
-          <FiLogIn size={16} color="#E02041" className="mr-2" />
-          Não tenho cadastro
-        </Link>
-      </section>
-
-      <section className="min-h-screen flex items-center justify-center px-16">
-        <div className="relative w-full max-w-lg">
-          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-          <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-          <div className="m-8 relative space-y-4">
-            <img src={herosImg} alt="Heroes" />
-          </div>
+    <div className=" w-full dark h-screen justify-center">
+      <div
+        className={`
+        flex
+        sm:flex-col
+        md:flex-row
+        mt-0
+        sm:pt-2
+        justify-center
+        items-center
+        transition
+        ${isDarkMode ? "dark:bg-[#0c081c]" : null}
+        `}
+      >
+        <div className="absolute right-0 top-0 m-10">
+          <Toggle handleSetDarkMode={() => setIsDarkMode(!isDarkMode)} />
         </div>
-      </section>
 
-      <Toast />
+        <section className={`w-full max-w-sm `}>
+          <img
+            src={isDarkMode ? logoImgLight : logoImg}
+            alt="Be The Hero"
+            className="mb-8"
+          />
+
+          <h1
+            className={`text-2xl text-[#585858] mb-2 ${
+              isDarkMode ? "dark:text-white" : null
+            }`}
+          >
+            Faça seu Logon
+          </h1>
+
+          <form className="w-full justify-center items-center">
+            <Input
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              label={"Seu ID"}
+              inputId={"id"}
+              type="text"
+              placeholder="Seu ID"
+              isDarkMode={isDarkMode}
+            />
+            <div className="hidden">
+              <Input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                inputId={"password"}
+                type={showPassword === false ? "password" : "text"}
+                placeholder={showPassword === false ? "*******" : "Sua senha"}
+                isDarkMode={isDarkMode}
+              />
+              <div className="text-2xl absolute ml-[17rem]">
+                {showPassword === false ? (
+                  <AiFillEye
+                    onClick={handleShowPassword}
+                    color="#585858"
+                    cursor="pointer"
+                  />
+                ) : (
+                  <AiFillEyeInvisible
+                    onClick={handleShowPassword}
+                    color="#585858"
+                    cursor="pointer"
+                  />
+                )}
+              </div>
+            </div>
+            <Button
+              label="Entrar"
+              color="red"
+              type="submit"
+              onClick={handleLogin}
+              isDarkMode={isDarkMode}
+            />
+          </form>
+
+          <Link
+            className={`flex mt-5 text-lg items-center text-[#41414d] ${
+              isDarkMode ? "dark:text-white" : null
+            }`}
+            to="./register"
+          >
+            <FiLogIn size={16} color="#E02041" className="mr-2" />
+            Não tenho cadastro
+          </Link>
+        </section>
+
+        <Animation isDarkMode={isDarkMode} />
+
+        <Toast />
+      </div>
     </div>
   );
 }
