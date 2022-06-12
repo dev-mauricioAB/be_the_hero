@@ -43,7 +43,7 @@ export const Input = ({ mask, label, type, inputId, ...props }: IInput) => {
           m-0
           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
       />
-      <label htmlFor="floatingInput" className="text-gray-700">
+      <label htmlFor="floatingInput" className="text-gray-500">
         {label}
       </label>
     </div>
