@@ -65,15 +65,15 @@ export default function Logon() {
     <div className=" w-full dark h-screen justify-center">
       <div
         className={`
-        flex
-        sm:flex-col
-        md:flex-row
-        mt-0
-        sm:pt-2
-        justify-center
-        items-center
-        transition
-        ${isDarkMode ? "dark:bg-[#0c081c]" : null}
+          flex
+          sm:flex-col
+          md:flex-row
+          mt-0
+          sm:pt-2
+          justify-center
+          items-center
+          transition
+          ${isDarkMode && "dark:bg-[#0c081c]"}
         `}
       >
         <div className="absolute right-0 top-0 m-10">
