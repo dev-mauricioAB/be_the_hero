@@ -84,12 +84,12 @@ export default function Logon() {
           <img
             src={isDarkMode ? logoImgLight : logoImg}
             alt="Be The Hero"
-            className="mb-8"
+            className="mb-8 select-none"
           />
 
           <h1
-            className={`text-2xl text-[#585858] mb-2 ${
-              isDarkMode ? "dark:text-white" : null
+            className={`text-2xl mb-2 select-none ${
+              isDarkMode ? "dark:text-white" : "text-[#585858]"
             }`}
           >
             Faça seu Logon

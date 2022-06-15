@@ -84,7 +84,7 @@ export default function Register() {
 
         <div
           className={`
-          ${isDarkMode ? "dark:bg-[#1a113d]" : "bg-gray-100"}
+          ${isDarkMode ? "dark:bg-[#1a113d] shadow-[#1b162d]" : "bg-gray-100"}
             transition
             w-full
             p-24
@@ -97,18 +97,22 @@ export default function Register() {
           `}
         >
           <section className="w-full max-w-sm">
-            <img src={isDarkMode ? logoImgLight : logoImg} alt="Be The Hero" />
+            <img
+              className="select-none"
+              src={isDarkMode ? logoImgLight : logoImg}
+              alt="Be The Hero"
+            />
 
             <h1
-              className={`mx-0 mt-16 mb-8 text-2xl ${
-                isDarkMode ? "dark:text-white" : null
+              className={`mx-0 mt-16 mb-8 text-2xl select-none ${
+                isDarkMode && "dark:text-white"
               }`}
             >
               Cadastro
             </h1>
             <p
-              className={`text-lg text-[#737380] leading-8 ${
-                isDarkMode ? "dark:text-[#c2c2c2]" : null
+              className={`text-lg leading-8 ${
+                isDarkMode ? "dark:text-[#c2c2c2]" : "text-[#737380]"
               }`}
             >
               Faça seu cadastro, entre na plataforma e ajude pessoas a
@@ -120,7 +124,7 @@ export default function Register() {
               to="/"
             >
               <FiArrowLeft className="mr-2" size={16} color="#E02041" />
-              <span className={`${isDarkMode ? "dark:text-white" : null}`}>
+              <span className={`${isDarkMode && "dark:text-white"}`}>
                 Voltar para Home
               </span>
             </Link>
@@ -169,27 +173,28 @@ export default function Register() {
               />
               <select
                 className={`
-                font-normal
-                shadow 
-                appearance-none 
-                rounded
-                text-base
-                w-20  
-                py-2 
-                px-3 
-                border border-solid border-gray-300
-                leading-tight 
-                focus:shadow-outline 
-                mb-2
-                ml-2
-                scrollbar-thumb-zinc-400 scrollbar-track-transparent scrollbar-thin
-                focus:outline-none
-                ${
-                  isDarkMode
-                    ? "bg-[#0e0628] focus:bg-[#0e0628] focus:border-white focus:text-gray-200 text-gray-200 active:bg-[#0e0628]"
-                    : "focus:text-gray-700 focus:bg-white focus:border-blue-600"
-                }
-              `}
+                  transition
+                  font-normal
+                  shadow 
+                  appearance-none 
+                  rounded
+                  text-base
+                  w-20  
+                  py-2 
+                  px-3 
+                  border border-solid border-gray-300
+                  leading-tight 
+                  focus:shadow-outline 
+                  mb-2
+                  ml-2
+                  scrollbar-thumb-zinc-400 scrollbar-track-transparent scrollbar-thin
+                  focus:outline-none
+                  ${
+                    isDarkMode
+                      ? "bg-[#0e0628] focus:bg-[#0e0628] focus:border-white focus:text-gray-200 text-gray-200 active:bg-[#0e0628]"
+                      : "focus:text-gray-700 focus:bg-white focus:border-blue-600"
+                  }
+                `}
                 placeholder="UF"
                 value={uf}
                 onChange={(e) => setUf(e.target.value)}

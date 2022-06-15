@@ -125,6 +125,7 @@ export default function Profile() {
             <div className="flex items-center">
               <Link
                 className={`
+                  select-none
                   h-14 
                   text-lg 
                   items-center 
@@ -160,7 +161,7 @@ export default function Profile() {
           </header>
           {incidents.length > 0 && (
             <h1
-              className={`mt-20 mb-6 ${
+              className={`mt-20 mb-6 select-none ${
                 isDarkMode ? "dark:text-white" : "text-black"
               }`}
             >
@@ -252,11 +253,11 @@ export default function Profile() {
             )}
           </div>
           {incidents.length === 0 && !loadingCases && (
-            <div className="h-96 w-full flex justify-center items-center">
+            <div className="h-96 w-full flex justify-center items-center first-line:">
               <img
                 src={heroImg}
                 alt="Imagem de Super Herói"
-                className="mr-10"
+                className="mr-10 select-none"
               />
             </div>
           )}
