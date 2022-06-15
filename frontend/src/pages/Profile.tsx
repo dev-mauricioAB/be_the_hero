@@ -99,7 +99,11 @@ export default function Profile() {
           <Toggle handleSetDarkMode={() => setIsDarkMode(!isDarkMode)} />
         </div>
 
-        <Modal onHandleChoise={handleModalChoise} incident={incidentSelected} />
+        <Modal
+          onHandleChoise={handleModalChoise}
+          incident={incidentSelected}
+          isDarkMode={isDarkMode}
+        />
 
         <div
           className={`absolute top-0 w-full max-w-6xl px-0 py-8 mx-8 my-auto transition `}
