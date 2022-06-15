@@ -1,18 +1,22 @@
-import React, {
-  useCallback,
-  InputHTMLAttributes,
-  FocusEventHandler,
-} from "react";
+import { useCallback, InputHTMLAttributes, FocusEventHandler } from "react";
 
 import { currency, phone } from "../utils/masks";
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   mask?: "currency" | "phone";
   label?: string;
+  isDarkMode?: boolean;
   inputId: string;
 }
 
-export const Input = ({ mask, label, type, inputId, ...props }: IInput) => {
+export const Input = ({
+  mask,
+  label,
+  type,
+  inputId,
+  isDarkMode,
+  ...props
+}: IInput) => {
   const handleKeyUp: FocusEventHandler<HTMLInputElement> = useCallback(
     (event) =>
       (mask === "currency" && currency(event)) ||
@@ -26,7 +30,7 @@ export const Input = ({ mask, label, type, inputId, ...props }: IInput) => {
         {...props}
         onBlur={handleKeyUp}
         id={inputId}
-        className="form-control
+        className={`form-control
           block
           w-full
           px-3
@@ -41,9 +45,17 @@ export const Input = ({ mask, label, type, inputId, ...props }: IInput) => {
           shadow
           ease-in-out
           m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          ${
+            isDarkMode
+              ? "bg-[#0e0628] focus:bg-[#0e0628] focus:border-white focus:text-gray-200 text-gray-200"
+              : "focus:text-gray-700 focus:bg-white focus:border-blue-600"
+          }
+           focus:outline-none`}
       />
-      <label htmlFor="floatingInput" className="text-gray-500">
+      <label
+        htmlFor="floatingInput"
+        className={`${isDarkMode ? "text-gray-200" : "text-gray-500"}`}
+      >
         {label}
       </label>
     </div>
