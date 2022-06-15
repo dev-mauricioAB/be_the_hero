@@ -62,7 +62,7 @@ export default function Logon() {
   const handleShowPassword = () => setShowPassword(!showPassword);
 
   return (
-    <div className=" w-full dark h-screen justify-center">
+    <div className=" w-full dark h-screen justify-center overflow-hidden">
       <div
         className={`
           flex
