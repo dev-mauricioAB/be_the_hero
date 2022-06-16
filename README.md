@@ -1,5 +1,6 @@
-<div align="center">
-  <img src=".github/logo.svg">
+<div align="center" style="display:flex;flex-direction:column;align-items:center">
+  <img width="120" src=".github/logo.svg" >
+  <img width="1200" src=".github/dark_1.gif" style="margin-top:1rem;border-radius:5px">
   <p>Apoie ONGs, apoie as boas causas, <strong>be a hero!</strong><p>
 
   [![Netlify Status](https://api.netlify.com/api/v1/badges/a105875c-8c87-46d0-888a-f6b21ddb5323/deploy-status)](https://app.netlify.com/sites/be-thehero/deploys) ![](https://img.shields.io/badge/omnistack-11-blueviolet?style=flat-square)
