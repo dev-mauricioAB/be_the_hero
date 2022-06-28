@@ -1,9 +1,13 @@
-import React from "react";
-
 import Routes from "./routes";
 
+import { ThemeProvider } from "./contexts/ThemeContext";
+
 function App() {
-  return <Routes />;
+  return (
+    <ThemeProvider>
+      <Routes />
+    </ThemeProvider>
+  );
 }
 
 export default App;
