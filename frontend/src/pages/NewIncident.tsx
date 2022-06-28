@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
+
+import { ThemeContex } from "../contexts/ThemeContext";
 
 import api from "../services/api";
 import { newIncidentSchema } from "../validations/form";
@@ -19,7 +21,7 @@ export default function NewIncident() {
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode } = useContext(ThemeContex);
 
   const navigate = useNavigate();
 
@@ -68,7 +70,7 @@ export default function NewIncident() {
           className={`h-screen w-full m-auto max-w-5xl flex items-center justify-center `}
         >
           <div className="absolute right-0 top-0 m-10">
-            <Toggle handleSetDarkMode={() => setIsDarkMode(!isDarkMode)} />
+            <Toggle />
           </div>
           <div
             className={`

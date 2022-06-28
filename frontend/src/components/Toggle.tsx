@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { MdOutlineLightMode, MdNightlightRound } from "react-icons/md";
+import { ThemeContex } from "../contexts/ThemeContext";
 
-interface IToggle {
-  handleSetDarkMode: () => void;
-}
-
-export const Toggle: React.FC<IToggle> = ({ handleSetDarkMode }) => {
-  const [toggle, setToggle] = useState(true);
+export const Toggle: React.FC = () => {
+  const { isDarkMode, handleTheme } = useContext(ThemeContex);
 
   return (
     <div
@@ -25,15 +22,12 @@ export const Toggle: React.FC<IToggle> = ({ handleSetDarkMode }) => {
         border-2
         
         ${
-          toggle
+          !isDarkMode
             ? "bg-gray-400 border-gray-600"
             : "bg-gray-300 border-[#7851fc]"
         }
       `}
-      onClick={() => {
-        setToggle(!toggle);
-        handleSetDarkMode();
-      }}
+      onClick={() => handleTheme(isDarkMode)}
     >
       <div
         className={`
@@ -50,10 +44,14 @@ export const Toggle: React.FC<IToggle> = ({ handleSetDarkMode }) => {
           shadow-md 
           transform
           transition
-          ${toggle ? "bg-white" : "translate-x-5 bg-gray-700"}
+          ${!isDarkMode ? "bg-white" : "translate-x-5 bg-gray-700"}
         `}
       >
-        {toggle ? <MdOutlineLightMode /> : <MdNightlightRound color="white" />}
+        {!isDarkMode ? (
+          <MdOutlineLightMode />
+        ) : (
+          <MdNightlightRound color="white" />
+        )}
       </div>
     </div>
   );

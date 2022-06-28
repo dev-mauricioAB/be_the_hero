@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiPower, FiTrash2 } from "react-icons/fi";
+
+import { ThemeContex } from "../contexts/ThemeContext";
 
 import api from "../services/api";
 
@@ -22,7 +24,7 @@ export default function Profile() {
   const [loadingDeleteCase, setLoadingDeleteCase] = useState(false);
   const [loadingCases, setLoadingCases] = useState(false);
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode } = useContext(ThemeContex);
 
   const navigate = useNavigate();
 
@@ -96,7 +98,7 @@ export default function Profile() {
         }`}
       >
         <div className="absolute right-0 top-0 m-10">
-          <Toggle handleSetDarkMode={() => setIsDarkMode(!isDarkMode)} />
+          <Toggle />
         </div>
 
         <Modal
