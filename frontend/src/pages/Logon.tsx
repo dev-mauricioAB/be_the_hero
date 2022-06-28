@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+
+import { ThemeContex } from "../contexts/ThemeContext";
 
 import Toast, { showToast } from "../components/Toast";
 import { Input } from "../components/Input";
@@ -20,7 +22,7 @@ export default function Logon() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode } = useContext(ThemeContex);
 
   const navigate = useNavigate();
 
@@ -77,7 +79,7 @@ export default function Logon() {
         `}
       >
         <div className="absolute right-0 top-0 m-10">
-          <Toggle handleSetDarkMode={() => setIsDarkMode(!isDarkMode)} />
+          <Toggle />
         </div>
 
         <section className={`w-full max-w-sm `}>

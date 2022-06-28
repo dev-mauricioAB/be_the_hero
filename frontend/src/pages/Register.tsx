@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
+
+import { ThemeContex } from "../contexts/ThemeContext";
 
 import api from "../services/api";
 import { registerSchema } from "../validations/form";
@@ -22,7 +24,8 @@ export default function Register() {
   const [city, setCity] = useState("");
   const [uf, setUf] = useState("");
   const [password, setPassword] = useState("");
-  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const { isDarkMode } = useContext(ThemeContex);
 
   const navigate = useNavigate();
 
@@ -79,7 +82,7 @@ export default function Register() {
         `}
       >
         <div className="absolute right-0 top-0 m-10">
-          <Toggle handleSetDarkMode={() => setIsDarkMode(!isDarkMode)} />
+          <Toggle />
         </div>
 
         <div
