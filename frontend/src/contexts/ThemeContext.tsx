@@ -1,11 +1,16 @@
-import { createContext, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 
-interface ThemeContexProps {
+interface IThemeContexValues {
   isDarkMode: boolean;
   handleTheme: (isDarkMode: boolean) => void;
 }
+type ContextProps = {
+  children: ReactNode;
+};
 
-export function ThemeProvider({ children }: any) {
+export const ThemeProvider: React.FC<ContextProps> = ({
+  children,
+}: ContextProps) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleTheme = (isDarkMode: boolean) => {
@@ -17,9 +22,9 @@ export function ThemeProvider({ children }: any) {
       {children}
     </ThemeContex.Provider>
   );
-}
+};
 
-export const ThemeContex = createContext<ThemeContexProps>({
+export const ThemeContex = createContext<IThemeContexValues>({
   isDarkMode: false,
   handleTheme: (isDarkMode: boolean) => {},
 });
