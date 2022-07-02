@@ -1,7 +1,7 @@
 import express from "express";
 import { celebrate, Segments, Joi } from "celebrate";
 
-import OngController from "./controllers/OngController";
+import UserController from "./controllers/UserController";
 import IncidentController from "./controllers/IncidentController";
 import ProfileController from "./controllers/ProfileController";
 import SessionController from "./controllers/SessionController";
@@ -10,7 +10,7 @@ export const routes = express.Router();
 
 routes.post("/sessions", SessionController.create);
 
-routes.get("/ongs", OngController.index);
+routes.get("/ongs", UserController.index);
 
 routes.post(
   "/ongs",
@@ -24,7 +24,7 @@ routes.post(
       uf: Joi.string().required().length(2),
     }),
   }),
-  OngController.create
+  UserController.create
 );
 
 routes.get(

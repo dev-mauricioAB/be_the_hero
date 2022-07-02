@@ -1,5 +1,5 @@
 import { connection } from "../database/connection";
-const generateUniquiId = require("../utils/generateUniqueId");
+import { generatorUniqueId } from "../utils/generateUniqueId";
 
 export default {
   async index(request: any, response: any) {
@@ -11,7 +11,7 @@ export default {
   async create(request: any, response: any) {
     const { password, name, email, whatsapp, city, uf } = request.body;
 
-    const id = generateUniquiId();
+    const id = generatorUniqueId();
 
     await connection("ongs").insert({
       id,
