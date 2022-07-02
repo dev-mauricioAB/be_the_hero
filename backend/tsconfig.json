@@ -14,12 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["jest", "node"],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@test/*": ["test/*"]
-    }
+    "types": ["jest", "node"]
   },
   "include": ["src", "tests/**/*"],
   "exclude": ["node"]

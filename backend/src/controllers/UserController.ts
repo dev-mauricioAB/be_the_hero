@@ -1,6 +1,8 @@
 import { connection } from "../database/connection";
 import { generatorUniqueId } from "../utils/generateUniqueId";
 
+import { User } from "../entities/user";
+
 export default {
   async index(request: any, response: any) {
     const ongs = await connection("ongs").select("*");
@@ -13,16 +15,33 @@ export default {
 
     const id = generatorUniqueId();
 
-    await connection("ongs").insert({
+    const type = "ong";
+
+    const user = User.create({
       id,
-      password,
+      type,
       name,
       email,
-      whatsapp,
+      password,
+      phoneNumber: whatsapp,
       city,
       uf,
     });
 
-    return response.json({ id });
+    if (user.isRight()) {
+      await connection("ongs").insert({
+        id,
+        password,
+        name,
+        email,
+        whatsapp,
+        city,
+        uf,
+      });
+
+      return response.json({ id });
+    } else if (user.isLeft()) {
+      return console.log(user.value);
+    }
   },
 };

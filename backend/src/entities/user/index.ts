@@ -1,28 +1,28 @@
-import { BinaryToTextEncoding } from "crypto";
-
-import { UserData } from "@/types/UserData";
-import { Either, left, right } from "@/shared";
+import { UserData } from "../../types/UserData";
+import { Either, left, right } from "../../shared";
 import { InvalidEmailError, InvalidNameError } from "../errors";
-import { Name } from "@/types/Name";
-import { Email } from "@/types/Email";
+import { Name } from "../../types/Name";
+import { Email } from "../../types/Email";
 
 export class User {
-  private id: BinaryToTextEncoding;
+  private id: string;
   private type: "ong" | "helper";
   private name: Name;
   private email: Email;
   private password: string; // adicionar type Password com validações
   private phoneNumber: string; // adicionar type PhoneNumber com validações
-  private description: string; // adicionar type Description com validações
+  private city: string; // adicionar type Description com validações
+  private uf: string; // adicionar type Description com validações
 
   private constructor(
-    id: BinaryToTextEncoding,
+    id: string,
     type: "ong" | "helper",
     name: Name,
     email: Email,
     password: string,
     phoneNumber: string,
-    description: string
+    city: string,
+    uf: string
   ) {
     this.id = id;
     this.type = type;
@@ -30,7 +30,8 @@ export class User {
     this.email = email;
     this.password = password;
     this.phoneNumber = phoneNumber;
-    this.description = description;
+    this.city = city;
+    this.uf = uf;
   }
 
   public static create(
@@ -53,10 +54,11 @@ export class User {
     const type = userData.type;
     const password = userData.password;
     const phoneNumber = userData.phoneNumber;
-    const description = userData.description;
+    const city = userData.city;
+    const uf = userData.uf;
 
     return right(
-      new User(id, type, name, email, password, phoneNumber, description)
+      new User(id, type, name, email, password, phoneNumber, city, uf)
     );
   }
 }
