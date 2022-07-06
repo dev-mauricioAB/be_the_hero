@@ -3,6 +3,8 @@ import { generatorUniqueId } from "../utils/generateUniqueId";
 
 import { User } from "../entities/user";
 
+import { UserData } from "./../types/UserData";
+
 export default {
   async index(request: any, response: any) {
     const ongs = await connection("ongs").select("*");
@@ -15,33 +17,25 @@ export default {
 
     const id = generatorUniqueId();
 
-    const type = "ong";
-
-    const user = User.create({
+    const userData: UserData = {
       id,
-      type,
+      password,
       name,
       email,
-      password,
       phoneNumber: whatsapp,
       city,
       uf,
-    });
+      type: "ong",
+    };
 
-    if (user.isRight()) {
-      await connection("ongs").insert({
-        id,
-        password,
-        name,
-        email,
-        whatsapp,
-        city,
-        uf,
-      });
+    const { value, isLeft, isRight } = User.create(userData);
 
+    if (isLeft()) {
+      response.statusCode = 400;
+      return response.json({ value });
+    } else if (isRight()) {
+      await connection("ongs").insert(userData);
       return response.json({ id });
-    } else if (user.isLeft()) {
-      return console.log(user.value);
     }
   },
 };
