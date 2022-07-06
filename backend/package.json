@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "start": "nodemon src/server.ts",
     "test": "cross-env NODE_ENV=test jest --coverage",
     "migrate": "knex migrate:latest --knexfile knexfile.ts"
   },
