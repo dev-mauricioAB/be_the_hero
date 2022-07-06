@@ -7,13 +7,13 @@ import { UserData } from "./../types/UserData";
 
 export default {
   async index(request: any, response: any) {
-    const ongs = await connection("ongs").select("*");
+    const ongs = await connection("users").select("*");
 
     return response.json(ongs);
   },
 
   async create(request: any, response: any) {
-    const { password, name, email, whatsapp, city, uf } = request.body;
+    const { password, name, email, phoneNumber, city, uf } = request.body;
 
     const id = generatorUniqueId();
 
@@ -22,7 +22,7 @@ export default {
       password,
       name,
       email,
-      phoneNumber: whatsapp,
+      phoneNumber,
       city,
       uf,
       type: "ong",
@@ -31,10 +31,9 @@ export default {
     const { value, isLeft, isRight } = User.create(userData);
 
     if (isLeft()) {
-      response.statusCode = 400;
-      return response.json({ value });
+      return response.status(400).json({ value });
     } else if (isRight()) {
-      await connection("ongs").insert(userData);
+      await connection("users").insert(userData);
       return response.json({ id });
     }
   },

@@ -1,7 +1,7 @@
 import { Knex } from "knex";
 
 export const up = (knex: Knex) => {
-  return knex.schema.createTable("ongs", (table: any) => {
+  return knex.schema.createTable("users", (table: any) => {
     table.string("id").primary();
     table.string("type").notNullable();
     table.string("password").notNullable();
@@ -14,5 +14,5 @@ export const up = (knex: Knex) => {
 };
 
 export const down = (knex: Knex) => {
-  return knex.schema.dropTable("ongs");
+  return knex.schema.dropTable("users");
 };
