@@ -14,7 +14,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": { "@/*": ["./src/*"] },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["src", "tests/**/*"],
   "exclude": ["node"]
